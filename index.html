@@ -1,341 +1,373 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-	<style>
-		    @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
-    * {
-      box-sizing: border-box;
-    }
+      * {
+        box-sizing: border-box;
+      }
 
-    body {
-      background: #e1e1e1 url('https://unsplash.com/photos/sbcIAn4Mn14/download?force=true&w=640') center center;
-      /*background: #e1e1e1 url('https://unsplash.com/photos/b2qszO9C7sw/download?force=true&w=640')  center center;*/
-      background-size: cover;
-      color: #fff;
-      font-family: 'Montserrat', sans-serif;
-      min-height: 100vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0;
-      /*backdrop-filter: blur(3px);*/
-    }
+      body {
+        background: #e1e1e1
+          url('https://unsplash.com/photos/sbcIAn4Mn14/download?force=true&w=640')
+          center center;
+        /*background: #e1e1e1 url('https://unsplash.com/photos/b2qszO9C7sw/download?force=true&w=640')  center center;*/
+        background-size: cover;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        min-height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        /*backdrop-filter: blur(3px);*/
+      }
 
-    h1 {
-      position: absolute;
-      opacity: 0.8;
-      top: 1px;
-    }
+      h1 {
+        position: absolute;
+        opacity: 0.8;
+        top: 1px;
+      }
 
-    span {
-    color: #fff;
-     font-size: 16px;
+      span {
+        color: #fff;
+        font-size: 16px;
+      }
 
-    }
+      .hidden {
+        display: none !important;
+      }
 
-    .hidden {
-      display: none!important;
-    }
+      .container {
+        background-color: rgba(225, 225, 225, 0.35);
+        border: 5px solid rgba(255, 255, 255, 0.5);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        height: 400px;
+        width: 245px;
+        position: relative;
+        transform: scale(1);
+      }
 
-    .container {
-      background-color: rgba(225, 225, 225, 0.35);
-      border: 5px solid rgba(255,255,255,0.5);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: auto;
-      height: 400px;
-      width: 245px;
-      position: relative;
-      transform: scale(1);
-    }
+      .subreddit-container {
+        color: #fff;
+        font-size: 16px;
+        text-align: center;
+      }
 
-    .subreddit-container {
-      color: #fff;
-      font-size: 16px;
-      text-align: center;
-    }
+      input {
+        border: none;
+        background-color: rgba(255, 255, 255, 0.3);
+        color: #000;
+        outline: none;
+        text-align: center;
+        font-size: 16px;
+        height: 24px;
+        margin-top: 10px;
+      }
 
-    input  {
-      border: none;
-      background-color: rgba(255, 255, 255, 0.3);
-      color: #000;
-      outline: none;
-      text-align: center;
-      font-size: 16px;
-      height: 24px;
-      margin-top: 10px;
-    }
+      .sorting {
+        color: #111;
+      }
 
-    .sorting {
-      color: #111;
-    }
+      button {
+        border-radius: 15px;
+        font-weight: 600;
+        color: #555;
+        border: 1px solid #b1b1b1;
+        background-color: #d1d1d1;
+        text-align: center;
+      }
 
-    button {
-      border-radius: 15px;
-      font-weight: 600;
-      color: #555;
-      border: 1px solid  #b1b1b1;
-      background-color: #d1d1d1;
-      text-align: center;
-    }
+      button:active {
+        outline: none;
+        background-color: #b1b1b1;
+      }
 
-    button:active {
-      outline: none;
-      background-color: #b1b1b1;
-    }
+      .image {
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        height: 100vh;
+        width: 100vw;
+        position: relative;
+        object-fit: cover;
+      }
 
-    .image {
-      align-items: center;
-      justify-content: center;
-      margin: auto; 
-      height: 100vh;
-      width: 100vw;
-      position: relative;
-      object-fit: cover;
-    }
+      .next-image {
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        height: 100vh;
+        width: 100vw;
+        position: relative;
+        object-fit: cover;
+      }
 
-    .breath {
-    	position: absolute;
-      align-items: center;
-      justify-content: center;
-      margin: auto; 
-      width: 100vw;
-      height: 0vh;
-      bottom: 0;
-      background-color: rgba(255, 255, 250, 0.35);
-      z-index: 10;
+      .breath {
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        width: 100vw;
+        height: 0vh;
+        bottom: 0;
+        background-color: rgba(255, 255, 250, 0.35);
+        z-index: 10;
+      }
 
-    }
+      .breath.grow {
+        height: 100vh;
+        transition: height 6s ease-in-out;
+        z-index: 10;
+      }
 
-    .breath.grow {
-    	height: 100vh;
-    	transition: height 6s ease-in-out;
-    	z-index: 10;
-    }
+      .breath.shrink {
+        height: 0vh;
+        transition: height 6s ease-in-out;
+        z-index: 10;
+      }
+    </style>
+    <title>Let it...</title>
+  </head>
+  <body>
+    <!-- <h1 id="text" class="text">Let it...</h1> -->
 
-    .breath.shrink {
-    	height: 0vh;
-    	transition: height 6s ease-in-out;
-    	z-index: 10;
-    }
- 
-	</style>
-	<title>Let it...</title>
-</head>
-<body>
+    <div id="container" class="container">
+      <div id="subreddit-container" class="subreddit-container">
+        The name of subreddit...<br />
+        <input id="subreddit" autofocus /><button id="ok">@</button>
+      </div>
 
-	<!-- <h1 id="text" class="text">Let it...</h1> -->
+      <div id="sorting" class="sorting hidden">
+        Sorting by:
+        <button id="sort-by-hot">hot</button>
+        <button id="sort-by-top">top</button>
+      </div>
+    </div>
 
-	<div  id="container" class="container">
+    <img id="image" class="image hidden" />
+    <img id="next-image" class="next-image hidden" />
+    <div id="breath" class="breath"></div>
+    <script>
+      const container = document.getElementById('container');
+      const imageContainer = document.getElementById('image-container');
+      const image = document.getElementById('image');
+      const nextImage = document.getElementById('next-image');
+      const text = document.getElementById('text');
+      const subredditContainer = document.getElementById('subreddit-container');
+      const subreddit = document.getElementById('subreddit');
+      const sorting = document.getElementById('sorting');
+      const sortByHot = document.getElementById('sort-by-hot');
+      const sortByTop = document.getElementById('sort-by-top');
+      const ok = document.getElementById('ok');
+      const breath = document.getElementById('breath');
 
-		<div id="subreddit-container" class="subreddit-container">The name of subreddit...<br/>
-			<input id="subreddit" autofocus><button id="ok">@</button>
-		</div>
+      let subredditName = '';
+      let hotImages = [];
+      let topImages = [];
+      let afterTop = '';
+      let afterHot = '';
 
-		<div id="sorting" class="sorting hidden">
-			Sorting by: 
-			<button id="sort-by-hot">hot</button>
-			<button id="sort-by-top">top</button>
-		</div>
+      let hotResult;
+      let topResult;
 
-	</div>
+      function chooseSubreddit() {
+        // breath.classList.add('grow');
 
-		<img  id="image" class="image hidden">
-		<div id="breath" class="breath"></div>
-		<script>
-const container = document.getElementById('container');
-const imageContainer = document.getElementById('image-container');
-const image = document.getElementById('image');
-const text = document.getElementById('text');
-const subredditContainer = document.getElementById('subreddit-container');
-const subreddit = document.getElementById('subreddit');
-const sorting = document.getElementById('sorting');
-const sortByHot = document.getElementById('sort-by-hot');
-const sortByTop = document.getElementById('sort-by-top');
-const ok = document.getElementById('ok');
-const breath = document.getElementById('breath');
+        subreddit.addEventListener('keydown', (e) => {
+          if (e.which == 13 || e.keyCode == 13 || e.key === 'Enter') {
+            if (subreddit.value) {
+              subredditName = subreddit.value.trim();
+              subreddit.value = '';
+              subreddit.style.display = 'none';
+              subredditContainer.style.display = 'none';
+              sorting.classList.remove('hidden');
 
-let subredditName = ''
-let hotImages = [];
-let topImages = [];
-let afterTop = '';
-let afterHot = '';
+              fetchImages(subredditName);
+            }
+          }
+        });
 
-let hotResult;
-let topResult;
+        ok.addEventListener('click', () => {
+          if (subreddit.value) {
+            subredditName = subreddit.value.trim();
+            subreddit.value = '';
+            subreddit.style.display = 'none';
+            subredditContainer.style.display = 'none';
+            sorting.classList.remove('hidden');
 
-function chooseSubreddit() {
+            fetchImages(subredditName);
+          }
+        });
 
-	// breath.classList.add('grow');
+        subreddit.addEventListener('input', (e) => {});
+      }
 
-	subreddit.addEventListener('keydown', (e => {
-		if (e.which == 13 || e.keyCode == 13 || e.key === 'Enter') {
-			if(subreddit.value) {
-				subredditName = subreddit.value.trim();
-				subreddit.value = '';
-				subreddit.style.display = 'none';
-				subredditContainer.style.display = 'none';
-				sorting.classList.remove('hidden');
+      function fetchImages(subredditName) {
+        hotResult = fetch(
+          `https://www.reddit.com/r/${subredditName}.json?limit=100`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            afterHot = data.data.after;
+            return data.data.children.map((data) => data.data);
+          })
+          .then((results) => {
+            results.forEach((post) => {
+              if (post.preview) {
+                hotImages.push(
+                  post.preview.images[0].source.url.replace(/amp;/gi, '')
+                );
+                // let index =  Math.floor(post.preview.images[0].resolutions.length/2);
+                // console.log(index);
+                // hotImages.push(post.preview.images[0].resolutions[index].url.replace(/amp;/gi,""))
+              }
+            });
+          });
 
-				fetchImages(subredditName);
-			} 
-		}
-	}))
+        topResult = fetch(
+          `https://www.reddit.com/r/${subredditName}/top.json?t=all&limit=100`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            afterHot = data.data.after;
+            return data.data.children.map((data) => data.data);
+          })
+          .then((results) => {
+            results.forEach((post) => {
+              afterTop = results[results.length - 1].name;
+              if (post.preview) {
+                topImages.push(
+                  post.preview.images[0].source.url.replace(/amp;/gi, '')
+                );
+                // let index =  Math.floor(post.preview.images[0].resolutions.length/2);
+                // topImages.push(post.preview.images[0].resolutions[index].url.replace(/amp;/gi,""))
+              }
+            });
+          });
 
-	ok.addEventListener('click', () => {
-			if(subreddit.value) {
-				subredditName = subreddit.value.trim();
-				subreddit.value = '';
-				subreddit.style.display = 'none';
-				subredditContainer.style.display = 'none';
-				sorting.classList.remove('hidden');
+        sortByHot.addEventListener('click', () => {
+          sorting.classList.add('hidden');
+          container.style.display = 'none';
+          startMeditation(hotResult, 'hot');
+        });
 
-				fetchImages(subredditName);
-			} 
-	})
+        sortByTop.addEventListener('click', () => {
+          sorting.classList.add('hidden');
+          container.style.display = 'none';
+          startMeditation(topResult, 'top');
+        });
+      }
 
-	subreddit.addEventListener('input', (e) => { 
-		if(e.target.value.contains('/')) {
-			subredditName = subreddit.value.trim();
-				subreddit.value = '';
-				subreddit.style.display = 'none';
-				subredditContainer.style.display = 'none';
-				sorting.classList.remove('hidden');
+      function downloadMoreImages(s) {
+        console.log(s, afterHot);
+        if (s === 'hot') {
+          fetch(
+            `https://www.reddit.com/r/${subredditName}.json?after=${afterHot}`
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              return data.data.children.map((data) => data.data);
+            })
+            .then((results) => {
+              results.forEach((post) => {
+                console.log(post);
+                afterHot = results[results.length - 1].name;
+                if (post.preview) {
+                  // hotImages.push(post.preview.images[0].source.url.replace(/amp;/gi,""))
+                  let index = Math.floor(
+                    post.preview.images[0].resolutions.length / 2
+                  );
+                  // console.log(index);
+                  hotImages.push(
+                    post.preview.images[0].resolutions[index].url.replace(
+                      /amp;/gi,
+                      ''
+                    )
+                  );
+                }
+              });
+            });
+        } else if (s === 'top') {
+          fetch(
+            `https://www.reddit.com/r/${subredditName}/top.json?t=all&after=${afterTop}`
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              return data.data.children.map((data) => data.data);
+            })
+            .then((results) => {
+              results.forEach((post) => {
+                if (post.preview) {
+                  console.log(post);
+                  // topImages.push(post.preview.images[0].source.url.replace(/amp;/gi,""))
+                  let index = Math.floor(
+                    post.preview.images[0].resolutions.length / 2
+                  );
+                  topImages.push(
+                    post.preview.images[0].resolutions[index].url.replace(
+                      /amp;/gi,
+                      ''
+                    )
+                  );
+                }
+              });
+            });
+        }
+      }
 
-				fetchImages(subredditName);
-		}
-	 })
+      function startMeditation(result, s) {
+        if (s === 'hot') {
+          images = hotImages;
+        } else if (s === 'top') {
+          images = topImages;
+        }
 
-}
+        // text.innerText = '';
+        let i = 0;
 
+        result.then(() => {
+          image.src = images[0];
+          nextImage.src = images[1];
+          breath.classList.add('grow');
+          image.classList.remove('hidden');
 
-function fetchImages(subredditName) {
+          setInterval(() => {
+            breath.classList.toggle('grow');
+            breath.classList.toggle('shrink');
+          }, 6000);
 
-	hotResult = fetch(`https://www.reddit.com/r/${subredditName}.json?limit=100`)
-      .then(res => res.json())
-        .then(data => { 
-        	afterHot = data.data.after;
-        	return data.data.children.map(data => data.data);
-        })
-          .then(results =>  { results.forEach(post => { 
-   	          		if (post.preview) {
-          			hotImages.push(post.preview.images[0].source.url.replace(/amp;/gi,""))
-          			// let index =  Math.floor(post.preview.images[0].resolutions.length/2);
-          			// console.log(index);
-          			// hotImages.push(post.preview.images[0].resolutions[index].url.replace(/amp;/gi,""))
-          	}}
-          	)})
+          setInterval(() => {
+            i++;
+            if (i % 2 === 0) {
+              image.src = images[i];
+              nextImage.src = images[i + 1];
+            } else {
+              image.src = images[i + 1];
+              nextImage.src = images[i];
+            }
 
- 	topResult = fetch(`https://www.reddit.com/r/${subredditName}/top.json?t=all&limit=100`)
-      .then(res => res.json())
-        .then(data => {
-        	afterHot = data.data.after;
-        	return data.data.children.map(data => data.data);
-        })
-          .then(results =>  {	results.forEach(post => {
-          					afterTop = results[results.length-1].name
-          	          		if (post.preview) {
-           						topImages.push(post.preview.images[0].source.url.replace(/amp;/gi,""))
-           						// let index =  Math.floor(post.preview.images[0].resolutions.length/2);
-           						// topImages.push(post.preview.images[0].resolutions[index].url.replace(/amp;/gi,""))
-      						 }}
-       				)})
-	 
+            image.classList.toggle('hidden');
+            nextImage.classList.toggle('hidden');
 
-    sortByHot.addEventListener('click', ()=> { 
-		sorting.classList.add('hidden');
-		container.style.display = 'none';
-		startMeditation(hotResult, 'hot');
-	});
+            if (i > images.length - 2) {
+              downloadMoreImages(s);
+            }
+          }, 12000);
+          // pointer.style.animation = 'rotate 12s linear forwards infinite';
+        });
+      }
 
-	sortByTop.addEventListener('click', ()=> { 
-		sorting.classList.add('hidden');
-		container.style.display = 'none';
-		startMeditation(topResult, 'top');
-	});
-}
-
-function downloadMoreImages(s) {
-	console.log(s, afterHot)
-	if (s === 'hot') {
-		fetch(`https://www.reddit.com/r/${subredditName}.json?after=${afterHot}`)
-	      .then(res => res.json())
-	        .then(data => { return data.data.children.map(data => data.data);})
-	          .then(results =>  { results.forEach(post => { 
-	          		console.log(post)
-	          		afterHot = results[results.length-1].name
-	          		if (post.preview) {
-	          			// hotImages.push(post.preview.images[0].source.url.replace(/amp;/gi,""))
-	          			let index =  Math.floor(post.preview.images[0].resolutions.length/2);
-	          			// console.log(index);
-	          			hotImages.push(post.preview.images[0].resolutions[index].url.replace(/amp;/gi,""))
-	          	}}
-	          	)})
-
-	} else if (s === 'top') {
-		fetch(`https://www.reddit.com/r/${subredditName}/top.json?t=all&after=${afterTop}`)
-	      .then(res => res.json())
-	        .then(data => { return data.data.children.map(data => data.data);})
-	          .then(results =>  {	results.forEach(post => {
-	          	          		if (post.preview) {
-	          	          			console.log(post)
-	           						// topImages.push(post.preview.images[0].source.url.replace(/amp;/gi,""))
-	           						let index =  Math.floor(post.preview.images[0].resolutions.length/2);
-	           						topImages.push(post.preview.images[0].resolutions[index].url.replace(/amp;/gi,""))
-	      						 }}
-	       				)})
-	}
-
-
-
-
-}
-
-
-function startMeditation(result, s) {
-
-
-
-
-	if (s === 'hot') {
-		images = hotImages;
-	} else if (s === 'top') {
-		images = topImages;
-	}
-
-	text.innerText = '';
-	let i = 0;
-
-     result.then(() => {
-     	image.src = images[0];
-     	breath.classList.add('grow');
-     	image.classList.remove('hidden');
-
-     	setInterval(() => {
-			breath.classList.toggle('grow');
-			breath.classList.toggle('shrink');
-		}, 6000);
-
-     	setInterval(() => {
-     		i++;
-			image.src = images[i];
-			if(i > images.length - 2) {
-				downloadMoreImages(s);
-			}
-		}, 12000);
-	// pointer.style.animation = 'rotate 12s linear forwards infinite';
-     })
-}
-
-chooseSubreddit();
-
-		</script>
-	</body>
-	</html>
+      chooseSubreddit();
+    </script>
+  </body>
+</html>

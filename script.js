@@ -1,4 +1,4 @@
-const container = document.getElementById('container');
+      const container = document.getElementById('container');
       const imageContainer = document.getElementById('image-container');
       const image = document.getElementById('image');
       const nextImage = document.getElementById('next-image');
@@ -128,7 +128,7 @@ const container = document.getElementById('container');
       }
 
       function downloadMoreImages(s) {
-        console.log(s, afterHot);
+        // console.log(s, afterHot);
         if (s === 'hot') {
           fetch(
             `https://www.reddit.com/r/${subredditName}.json?after=${afterHot}`
@@ -139,7 +139,7 @@ const container = document.getElementById('container');
             })
             .then((results) => {
               results.forEach((post) => {
-                console.log(post);
+                // console.log(post);
                 afterHot = results[results.length - 1].name;
                 if (post.preview) {
                   // hotImages.push(post.preview.images[0].source.url.replace(/amp;/gi,""))
@@ -167,7 +167,7 @@ const container = document.getElementById('container');
             .then((results) => {
               results.forEach((post) => {
                 if (post.preview) {
-                  console.log(post);
+                  // console.log(post);
                   // topImages.push(post.preview.images[0].source.url.replace(/amp;/gi,""))
                   let index = Math.floor(
                     post.preview.images[0].resolutions.length / 2
@@ -188,8 +188,8 @@ const container = document.getElementById('container');
         close.classList.remove('hidden');
         let speedInMs = 6000;
         breath.style.transition = 'height 6s ease-in-out'
-        faster.classList.remove('hidden');
-        slower.classList.remove('hidden');
+        // faster.classList.remove('hidden');
+        // slower.classList.remove('hidden');
 
         if (s === 'hot') {
           images = hotImages;
@@ -205,16 +205,16 @@ const container = document.getElementById('container');
 
         faster.addEventListener('click', () => {
           speedInMs = speedInMs - 1000;
-          console.log(speedInMs);
+          // console.log(speedInMs);
           breath.style.transition = `height ${ speedInMs / 1000 }s ease-in-out`
-          console.log(speedInMs, breath.style.transition)
+          // console.log(speedInMs, breath.style.transition)
         })
 
         slower.addEventListener('click', () => {
           speedInMs = speedInMs + 1000;
-          console.log(speedInMs);
+          // console.log(speedInMs);
           breath.style.transition = `height ${ speedInMs / 1000 }s ease-in-out`
-          console.log(speedInMs, breath.style.transition)
+          // console.log(speedInMs, breath.style.transition)
         })
 
         // text.innerText = '';

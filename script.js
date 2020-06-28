@@ -11,6 +11,9 @@ const container = document.getElementById('container');
       const ok = document.getElementById('ok');
       const breath = document.getElementById('breath');
       const buttons = document.getElementById('buttons');
+      const faster = document.getElementById('faster');
+      const slower = document.getElementById('slower');
+      const close = document.getElementById('close');
 
       let subredditName = '';
       let hotImages = [];
@@ -29,9 +32,9 @@ const container = document.getElementById('container');
             if (subreddit.value) {
               subredditName = subreddit.value.trim();
               subreddit.value = '';
-              subreddit.style.display = 'none';
-              buttons.style.display = 'none';
-              subredditContainer.style.display = 'none';
+              subreddit.classList.add('hidden');
+              buttons.classList.add('hidden');
+              subredditContainer.classList.add('hidden');
               sorting.classList.remove('hidden');
 
               fetchImages(subredditName);
@@ -43,9 +46,9 @@ const container = document.getElementById('container');
           if (subreddit.value) {
             subredditName = subreddit.value.trim();
             subreddit.value = '';
-            subreddit.style.display = 'none';
-            buttons.style.display = 'none';
-            subredditContainer.style.display = 'none';
+            subreddit.classList.add('hidden');
+            buttons.classList.add('hidden');
+            subredditContainer.classList.add('hidden');
             sorting.classList.remove('hidden');
 
             fetchImages(subredditName);
@@ -56,9 +59,9 @@ const container = document.getElementById('container');
           if (e.target.tagName === 'BUTTON');
             subredditName = e.target.id;
             subreddit.value = '';
-            subreddit.style.display = 'none';
-            buttons.style.display = 'none';
-            subredditContainer.style.display = 'none';
+            subreddit.classList.add('hidden');
+            buttons.classList.add('hidden');
+            subredditContainer.classList.add('hidden');
             sorting.classList.remove('hidden');
 
             fetchImages(subredditName);
@@ -113,13 +116,13 @@ const container = document.getElementById('container');
 
         sortByHot.addEventListener('click', () => {
           sorting.classList.add('hidden');
-          container.style.display = 'none';
+          container.classList.add('hidden');
           startMeditation(hotResult, 'hot');
         });
 
         sortByTop.addEventListener('click', () => {
           sorting.classList.add('hidden');
-          container.style.display = 'none';
+          container.classList.add('hidden');
           startMeditation(topResult, 'top');
         });
       }
@@ -182,11 +185,37 @@ const container = document.getElementById('container');
       }
 
       function startMeditation(result, s) {
+        close.classList.remove('hidden');
+        let speedInMs = 6000;
+        breath.style.transition = 'height 6s ease-in-out'
+        faster.classList.remove('hidden');
+        slower.classList.remove('hidden');
+
         if (s === 'hot') {
           images = hotImages;
+          topImages = [];
         } else if (s === 'top') {
           images = topImages;
+          hotImages = [];
         }
+
+        close.addEventListener('click', () => {
+          document.location.reload(true);
+        });
+
+        faster.addEventListener('click', () => {
+          speedInMs = speedInMs - 1000;
+          console.log(speedInMs);
+          breath.style.transition = `height ${ speedInMs / 1000 }s ease-in-out`
+          console.log(speedInMs, breath.style.transition)
+        })
+
+        slower.addEventListener('click', () => {
+          speedInMs = speedInMs + 1000;
+          console.log(speedInMs);
+          breath.style.transition = `height ${ speedInMs / 1000 }s ease-in-out`
+          console.log(speedInMs, breath.style.transition)
+        })
 
         // text.innerText = '';
         let i = 0;
@@ -197,12 +226,12 @@ const container = document.getElementById('container');
           breath.classList.add('grow');
           image.classList.remove('hidden');
 
-          setInterval(() => {
+          relax = setInterval(() => {
             breath.classList.toggle('grow');
             breath.classList.toggle('shrink');
-          }, 6000);
+          }, speedInMs);
 
-          setInterval(() => {
+          slideshow = setInterval(() => {
             i++;
             if (i % 2 === 0) {
               image.src = images[i];
@@ -218,7 +247,7 @@ const container = document.getElementById('container');
             if (i > images.length - 2) {
               downloadMoreImages(s);
             }
-          }, 12000);
+          }, speedInMs * 2);
           // pointer.style.animation = 'rotate 12s linear forwards infinite';
         });
       }

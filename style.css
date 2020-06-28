@@ -1,6 +1,8 @@
-      @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+      
 
+      @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
       * {
+
         box-sizing: border-box;
       }
 
@@ -21,10 +23,42 @@
         /*backdrop-filter: blur(3px);*/
       }
 
-      h1 {
-        position: absolute;
-        opacity: 0.8;
-        top: 1px;
+      .close {
+        background-color: rgba(225, 225, 225, 0.35);
+        border-color: rgba(255, 255, 255, 0.5);
+        position: fixed;
+        opacity: 0.5;
+        width:25px;
+        height:25px;
+        border-radius: 50%;
+        top: 10px;
+        right: 10px;
+        text-align: center;
+        z-index: 100;
+        outline: none;
+      }
+
+      .faster, .slower {
+        background-color: rgba(225, 225, 225, 0.35);
+        border-color: rgba(255, 255, 255, 0.5);
+        position: fixed;
+        opacity: 0.5;
+        width:25px;
+        height:25px;
+        border-radius: 50%;
+        bottom: 10px;
+        right: 10px;
+        text-align: center;
+        z-index: 100;
+        outline: none;
+      }
+
+      .slower {
+        bottom: 10px;
+      }
+
+      .faster {
+        bottom: 40px;       
       }
 
       span {
@@ -120,17 +154,16 @@
         height: 0vh;
         bottom: 0;
         background-color: rgba(255, 255, 250, 0.35);
+        /*transition: height 6s ease-in-out;*/
         z-index: 10;
       }
 
       .breath.grow {
         height: 100vh;
-        transition: height 6s ease-in-out;
-        z-index: 10;
+        /*transition: height 6s ease-in-out;*/
       }
 
       .breath.shrink {
         height: 0vh;
-        transition: height 6s ease-in-out;
-        z-index: 10;
+        /*transition: height 6s ease-in-out;*/
       }

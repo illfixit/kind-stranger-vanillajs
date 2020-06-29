@@ -82,7 +82,8 @@
           })
           .then((results) => {
             results.forEach((post) => {
-              if (post.preview) {
+              if (post.preview && !post.is_video && !post.preview.images[0].source.url.includes('gif') && !post.over_18 && (post.preview.images[0].resolutions[0].height / post.preview.images[0].resolutions[0].width > 1.3)) {
+                console.log(post.preview.images[0].resolutions[0].height / post.preview.images[0].resolutions[0].width)
                 hotImages.push(
                   post.preview.images[0].source.url.replace(/amp;/gi, '')
                 );
@@ -104,7 +105,7 @@
           .then((results) => {
             results.forEach((post) => {
               afterTop = results[results.length - 1].name;
-              if (post.preview) {
+              if (post.preview && !post.is_video && !post.preview.images[0].source.url.includes('gif') && !post.over_18 && (post.preview.images[0].resolutions[0].height / post.preview.images[0].resolutions[0].width > 1.3)) {
                 topImages.push(
                   post.preview.images[0].source.url.replace(/amp;/gi, '')
                 );
@@ -221,6 +222,7 @@
         let i = 0;
 
         result.then(() => {
+        	console.log(images)
           image.src = images[0];
           nextImage.src = images[1];
           breath.classList.add('grow');

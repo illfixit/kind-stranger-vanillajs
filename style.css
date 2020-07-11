@@ -1,170 +1,111 @@
-      
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+* {
+  box-sizing: border-box;
+}
 
-      @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-      * {
+body {
+  background: #e1e1e1
+    url('https://unsplash.com/photos/sbcIAn4Mn14/download?force=true&w=640')
+    center center;
+  /*background: #e1e1e1 url('https://unsplash.com/photos/b2qszO9C7sw/download?force=true&w=640')  center center;*/
+  background-size: cover;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  /*backdrop-filter: blur(3px);*/
+}
 
-        box-sizing: border-box;
-      }
+.close {
+  background-color: rgba(225, 225, 225, 0.35);
+  border-color: rgba(255, 255, 255, 0.5);
+  position: fixed;
+  opacity: 0.5;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  top: 1rem;
+  right: 1rem;
+  text-align: center;
+  z-index: 100;
+  outline: none;
+}
 
-      body {
-        background: #e1e1e1
-          url('https://unsplash.com/photos/sbcIAn4Mn14/download?force=true&w=640')
-          center center;
-        /*background: #e1e1e1 url('https://unsplash.com/photos/b2qszO9C7sw/download?force=true&w=640')  center center;*/
-        background-size: cover;
-        color: #fff;
-        font-family: 'Montserrat', sans-serif;
-        min-height: 100vh;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0;
-        /*backdrop-filter: blur(3px);*/
-      }
+span {
+  color: #fff;
+  font-size: 16px;
+  height: 24px;
+}
 
-      .close {
-        background-color: rgba(225, 225, 225, 0.35);
-        border-color: rgba(255, 255, 255, 0.5);
-        position: fixed;
-        opacity: 0.5;
-        width: 3rem;
-        height: 3rem;
-        font-size: 1.2rem;
-        border-radius: 50%;
-        top: 1rem;
-        right: 1rem;
-        text-align: center;
-        z-index: 100;
-        outline: none;
-      }
+.hidden {
+  display: none !important;
+}
 
-      .faster, .slower {
-        background-color: rgba(225, 225, 225, 0.35);
-        border-color: rgba(255, 255, 255, 0.5);
-        position: fixed;
-        opacity: 0.5;
-        width: 3rem;
-        height: 3rem;
-        font-size: 1.2rem;
-        border-radius: 50%;
-        right: 1rem;
-        text-align: center;
-        z-index: 100;
-        outline: none;
-      }
+.container {
+  background-color: rgba(225, 225, 225, 0.35);
+  border: 5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  height: 400px;
+  width: 245px;
+  position: relative;
+  transform: scale(1);
+}
 
-      .slower {
-        bottom: 2rem;
-      }
+.subreddit-container {
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+}
 
-      .faster {
-        bottom: 5.5rem;       
-      }
+input {
+  border: none;
+  border-radius: 7px;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #000;
+  outline: none;
+  text-align: left;
+  font-size: 16px;
+  height: 24px;
+  width: 75%;
+  margin-top: 10px;
+}
 
-      span {
-        color: #fff;
-        font-size: 16px;
-        height: 24px;
-      }
+.sorting {
+  color: #111;
+}
 
-      .hidden {
-        display: none !important;
-      }
+button {
+  border-radius: 15px;
+  font-weight: 600;
+  color: #fff;
+  height: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background-color: #d1d1d1;
+  font-weight: 400;
+  text-align: center;
+  margin: 3px 1px;
+}
 
-      .container {
-        background-color: rgba(225, 225, 225, 0.35);
-        border: 5px solid rgba(255, 255, 255, 0.5);
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: auto;
-        height: 400px;
-        width: 245px;
-        position: relative;
-        transform: scale(1);
-      }
+button:active {
+  outline: none;
+  background-color: #b1b1b1;
+}
 
-      .subreddit-container {
-        color: #fff;
-        font-size: 16px;
-        text-align: center;
-      }
-
-      input {
-        border: none;
-        border-radius: 7px;
-        background-color: rgba(255, 255, 255, 0.3);
-        color: #000;
-        outline: none;
-        text-align: left;
-        font-size: 16px;
-        height: 24px;
-        width: 75%;
-        margin-top: 10px;
-      }
-
-      .sorting {
-        color: #111;
-      }
-
-      button {
-        border-radius: 15px;
-        font-weight: 600;
-        color: #fff;
-        height: 24px;
-        border: 1px solid rgba(0, 0, 0, 0.3);
-        background-color: #d1d1d1;
-        font-weight: 400;
-        text-align: center;
-        margin: 3px 1px;
-      }
-
-      button:active {
-        outline: none;
-        background-color: #b1b1b1;
-      }
-
-      .image {
-        align-items: center;
-        justify-content: center;
-        margin: auto;
-        height: 100vh;
-        width: 100vw;
-        position: relative;
-        object-fit: cover;
-      }
-
-      .next-image {
-        align-items: center;
-        justify-content: center;
-        margin: auto;
-        height: 100vh;
-        width: 100vw;
-        position: relative;
-        object-fit: cover;
-      }
-
-      .breath {
-        position: absolute;
-        align-items: center;
-        justify-content: center;
-        margin: auto;
-        width: 100vw;
-        height: 0vh;
-        bottom: 0;
-        background-color: rgba(255, 255, 250, 0.35);
-        /*transition: height 6s ease-in-out;*/
-        z-index: 10;
-      }
-
-      .breath.grow {
-        height: 100vh;
-        /*transition: height 6s ease-in-out;*/
-      }
-
-      .breath.shrink {
-        height: 0vh;
-        /*transition: height 6s ease-in-out;*/
-      }
+.image {
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  object-fit: cover;
+}

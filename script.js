@@ -21,7 +21,7 @@ var close = document.getElementById('close');
 var subredditName = '';
 var images = [];
 var after = '';
-var sortedUrl 
+var sortedUrl;
 
 // var currentUrl = window.location.href;
 // var params = currentUrl.split('?')[1]
@@ -35,8 +35,7 @@ var sortedUrl
 //     subredditContainer.classList.add('hidden');
 //     sorting.classList.remove('hidden');
 //     fetchImages(subredditName);
-// }  
-
+// }
 
 function chooseSubreddit() {
   subreddit.addEventListener('keydown', function (e) {
@@ -49,7 +48,7 @@ function chooseSubreddit() {
         subredditContainer.classList.add('hidden');
         sorting.classList.remove('hidden');
 
-    chooseTypeOfSort(subredditName);
+        chooseTypeOfSort(subredditName);
       }
     }
   });
@@ -63,7 +62,7 @@ function chooseSubreddit() {
       subredditContainer.classList.add('hidden');
       sorting.classList.remove('hidden');
 
-    chooseTypeOfSort(subredditName);
+      chooseTypeOfSort(subredditName);
     }
   });
 
@@ -82,74 +81,82 @@ function chooseSubreddit() {
   subreddit.addEventListener('input', function (e) {});
 }
 
-
 function chooseTypeOfSort(subredditName) {
+  close.classList.remove('hidden');
 
-	  // Event Listeners
- 	 sortByHot.addEventListener('click', function () {
-    	sorting.classList.add('hidden');
-    	container.classList.add('hidden');
-    	fetchImages(subredditName, 'HOT');
-  	});
+  close.addEventListener('click', function () {
+    document.location.reload(true);
+  });
 
- 	 sortByNew.addEventListener('click', function () {
-    	sorting.classList.add('hidden');
-    	container.classList.add('hidden');
-    	fetchImages(subredditName, 'NEW');
-  	});
+  // Event Listeners
+  sortByHot.addEventListener('click', function () {
+    sorting.classList.add('hidden');
+    container.classList.add('hidden');
+    fetchImages(subredditName, 'HOT');
+  });
 
- 	 sortByTopDay.addEventListener('click', function () {
-    	sorting.classList.add('hidden');
-    	container.classList.add('hidden');
-    	fetchImages(subredditName, 'TOPOFTHEDAY');
-  	});
+  sortByNew.addEventListener('click', function () {
+    sorting.classList.add('hidden');
+    container.classList.add('hidden');
+    fetchImages(subredditName, 'NEW');
+  });
 
- 	 sortByTopWeek.addEventListener('click', function () {
-    	sorting.classList.add('hidden');
-    	container.classList.add('hidden');
-    	fetchImages(subredditName, 'TOPOFTHEWEEK');
-  	}); 	 
+  sortByTopDay.addEventListener('click', function () {
+    sorting.classList.add('hidden');
+    container.classList.add('hidden');
+    fetchImages(subredditName, 'TOPOFTHEDAY');
+  });
 
- 	 sortByTopMonth.addEventListener('click', function () {
-    	sorting.classList.add('hidden');
-    	container.classList.add('hidden');
-    	fetchImages(subredditName, 'TOPOFTHEMONTH');
-  	}); 	 
+  sortByTopWeek.addEventListener('click', function () {
+    sorting.classList.add('hidden');
+    container.classList.add('hidden');
+    fetchImages(subredditName, 'TOPOFTHEWEEK');
+  });
 
- 	 sortByTopYear.addEventListener('click', function () {
-    	sorting.classList.add('hidden');
-    	container.classList.add('hidden');
-    	fetchImages(subredditName, 'TOPOFTHEYEAR');
-  	}); 	 
+  sortByTopMonth.addEventListener('click', function () {
+    sorting.classList.add('hidden');
+    container.classList.add('hidden');
+    fetchImages(subredditName, 'TOPOFTHEMONTH');
+  });
 
- 	 sortByTopAll.addEventListener('click', function () {
-    	sorting.classList.add('hidden');
-    	container.classList.add('hidden');
-    	fetchImages(subredditName, 'TOPOFALLTIME');
-  	}); 	 
+  sortByTopYear.addEventListener('click', function () {
+    sorting.classList.add('hidden');
+    container.classList.add('hidden');
+    fetchImages(subredditName, 'TOPOFTHEYEAR');
+  });
+
+  sortByTopAll.addEventListener('click', function () {
+    sorting.classList.add('hidden');
+    container.classList.add('hidden');
+    fetchImages(subredditName, 'TOPOFALLTIME');
+  });
 }
 
-
-
 function fetchImages(subredditName, sortBy) {
+  sortedUrl = `https://www.reddit.com/r/${subredditName}.json`;
 
-  sortedUrl = `https://www.reddit.com/r/${subredditName}.json`
-
-  switch(sortBy) {
-    case 'HOT' : sortedUrl = `https://www.reddit.com/r/${subredditName}.json`
-    break;
-    case 'NEW' : sortedUrl = `https://www.reddit.com/r/${subredditName}/new.json`
-    break;
-    case 'TOPOFTHEDAY' : sortedUrl = `https://www.reddit.com/r/${subredditName}/top.json?t=day`
-    break;
-    case 'TOPOFTHEWEEK' : sortedUrl = `https://www.reddit.com/r/${subredditName}/top.json?t=week`
-    break;
-    case 'TOPOFTHEMONTH' : sortedUrl = `https://www.reddit.com/r/${subredditName}/top.json?t=month`
-    break;
-    case 'TOPOFTHEYEAR' : sortedUrl = `https://www.reddit.com/r/${subredditName}/top.json?t=year`
-    break;
-    case 'TOPOFALLTIME' : sortedUrl = `https://www.reddit.com/r/${subredditName}/top.json?t=all`
-    break;
+  switch (sortBy) {
+    case 'HOT':
+      sortedUrl = `https://www.reddit.com/r/${subredditName}.json`;
+      break;
+    case 'NEW':
+      sortedUrl = `https://www.reddit.com/r/${subredditName}/new.json`;
+      break;
+    case 'TOPOFTHEDAY':
+      sortedUrl = `https://www.reddit.com/r/${subredditName}/top.json?t=day`;
+      break;
+    case 'TOPOFTHEWEEK':
+      sortedUrl = `https://www.reddit.com/r/${subredditName}/top.json?t=week`;
+      break;
+    case 'TOPOFTHEMONTH':
+      sortedUrl = `https://www.reddit.com/r/${subredditName}/top.json?t=month`;
+      break;
+    case 'TOPOFTHEYEAR':
+      sortedUrl = `https://www.reddit.com/r/${subredditName}/top.json?t=year`;
+      break;
+    case 'TOPOFALLTIME':
+      sortedUrl = `https://www.reddit.com/r/${subredditName}/top.json?t=all`;
+      break;
   }
 
   var sortedXhr = new XMLHttpRequest();
@@ -168,17 +175,14 @@ function fetchImages(subredditName, sortBy) {
       }
     });
 
-    startMeditation(sortedUrl)
+    startMeditation(sortedUrl);
   };
 }
 
 function downloadMoreImages(url) {
   // console.log('More');
   var moreXhr = new XMLHttpRequest();
-  moreXhr.open(
-    'GET',
-    `${url}?after=${after}`
-  );
+  moreXhr.open('GET', `${url}?after=${after}`);
   moreXhr.responseType = 'json';
   moreXhr.send();
   moreXhr.onload = function () {
@@ -195,7 +199,7 @@ function downloadMoreImages(url) {
 }
 
 function startMeditation(url) {
-  close.classList.remove('hidden');
+  // close.classList.remove('hidden');
   // var speedInMs = 6000;
 
   close.addEventListener('click', function () {
@@ -205,52 +209,128 @@ function startMeditation(url) {
   var i = 0;
 
   image.classList.remove('hidden');
+  image.src = images[i];
 
-  setInterval(function () {
+  var lastScrollTop = 0;
+
+  function wheelScroll(e) {
     var img = new Image();
     img.src = images[i];
-    i++;
-    img.onload = function () {
-      // console.log('OK');
-      image.src = images[i];
-    };
-    img.onerror = function () {
-      // console.log('Not OK');
+
+    if (event.deltaY > 0) {
       i++;
-    };
+      img.onload = function () {
+        image.src = images[i];
+      };
+      img.onerror = function () {
+        i++;
+      };
 
-    // image.src = images[i];
-    // i++;
+      // image.src = images[i];
+      // i++;
 
-    if (i > images.length - 2) {
-      downloadMoreImages(url);
+      if (i > images.length - 2) {
+        downloadMoreImages(url);
+      }
+    } else if (event.deltaY < 0) {
+      if (i < 2) i = 1;
+      i--;
     }
-  }, 5000);
+    image.src = images[i];
+    window.removeEventListener('wheel', wheelScroll);
+    setTimeout(function () {
+      window.addEventListener('wheel', wheelScroll);
+    }, 300);
+  }
+
+  function mobileScroll(e) {
+    e.preventDefault();
+    if (window.pageYOffset < 0) {
+      // downscroll code
+      i++;
+      image.src = images[i];
+      // alert('Scrolling down');
+    } else if (window.pageYOffset > 0) {
+      // upscroll code
+      i--;
+      if (i < 1) i = 0;
+      image.src = images[i];
+      // alert('Scrolling up');
+    }
+
+    window.removeEventListener('touchmove', mobileScroll);
+    setTimeout(function () {
+      window.addEventListener('touchmove', mobileScroll);
+    }, 500);
+  }
+
+  // Mouse Wheel Scroll
+  window.addEventListener('wheel', wheelScroll);
+
+  // Mobile Devices Scroll
+  // window.addEventListener('touchmove', mobileScroll);
+
+  // window.addEventListener('touchstart', function (e) {
+  //   alert('touchstart' + window.pageYOffset);
+  // });
+
+  var newY = 0;
+
+  window.addEventListener('touchstart', function (e) {
+    e.preventDefault();
+    // console.log(e.target.className);
+    if (e.target.className == 'close') {
+      document.location.reload(true);
+    }
+    // console.log(e.changedTouches[0].clientY);
+    newY = e.changedTouches[0].clientY;
+  });
+
+  window.addEventListener('touchend', function (e) {
+    e.preventDefault();
+    var delta = e.changedTouches[0].clientY - newY;
+    // console.log(delta);
+    if (delta < 0) {
+      i++;
+      image.src = images[i];
+      if (i > images.length - 2) {
+        downloadMoreImages(url);
+      }
+    } else if (delta > 0) {
+      i--;
+      if (i < 1) i = 0;
+      image.src = images[i];
+    }
+  });
+
+  // window.addEventListener('touchmove', function (e) {
+  //   console.log(e);
+  // });
+
+  // window.addEventListener('touchend', function (e) {
+  //   alert('touchend' + window.pageYOffset);
+  // });
+
+  // setInterval(function () {
+  //   var img = new Image();
+  //   img.src = images[i];
+  //   i++;
+  //   img.onload = function () {
+  //     // console.log('OK');
+  //     image.src = images[i];
+  //   };
+  //   img.onerror = function () {
+  //     // console.log('Not OK');
+  //     i++;
+  //   };
+
+  //   // image.src = images[i];
+  //   // i++;
+
+  //   if (i > images.length - 2) {
+  //     downloadMoreImages(url);
+  //   }
+  // }, 5000);
 }
 
 chooseSubreddit();
-
-// xhr.open(
-//   'GET',
-//   `https://www.reddit.com/r/${subredditName}/top.json?t=all&after=${afterTop}`
-// );
-
-// xhr.open(
-//   'GET',
-//   `https://www.reddit.com/r/${subredditName}/top.json?t=day&after=${afterTop}`
-// );
-
-// xhr.open(
-//   'GET',
-//   `https://www.reddit.com/r/${subredditName}/top.json?t=week&after=${afterTop}`
-// );
-
-// xhr.open(
-//   'GET',
-//   `https://www.reddit.com/r/${subredditName}/top.json?t=month&after=${afterTop}`
-// );
-
-// xhr.open(
-//   'GET',
-//   `https://www.reddit.com/r/${subredditName}/new.json&after=${afterTop}`
-// );

@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 * {
   box-sizing: border-box;
+  -webkit-overflow-scrolling: none;
+  overflow: hidden;
 }
 
 body {
@@ -110,6 +112,6 @@ button:active {
   margin: auto;
   height: 100vh;
   width: 100vw;
-  position: relative;
+  position: fixed;
   object-fit: cover;
 }

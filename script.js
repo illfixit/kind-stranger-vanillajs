@@ -178,11 +178,11 @@ function downloadNextPost(url) {
     } else {
       posts.push(post.data);
       // console.log(posts)
-      if (!post.data.preview.images[0].resolutions[2]) {
+      if (!post.data.preview.images[0].resolutions[3]) {
         console.log('next');
         downloadNextPost(url);
       }
-      image.src = post.data.preview.images[0].resolutions[2].url.replace(
+      image.src = post.data.preview.images[0].resolutions[3].url.replace(
         /amp;/gi,
         ''
       );
@@ -221,7 +221,7 @@ function startMeditation(url) {
         }
         image.src = posts[
           posts.length - 1 - counter
-        ].preview.images[0].resolutions[2].url.replace(/amp;/gi, '');
+        ].preview.images[0].resolutions[3].url.replace(/amp;/gi, '');
         // console.log('OK')
         setTimeout(function () {
           (title.innerText = posts[posts.length - 1 - counter]['title']), 250;
@@ -249,10 +249,10 @@ function startMeditation(url) {
         window.addEventListener('wheel', wheelScroll);
       }, 300);
       counter++;
-      // console.log(posts[posts.length-1-counter].preview.images[0].resolutions[2].url.replace(/amp;/gi,''));
+      // console.log(posts[posts.length-1-counter].preview.images[0].resolutions[3].url.replace(/amp;/gi,''));
       image.src = posts[
         posts.length - 1 - counter
-      ].preview.images[0].resolutions[2].url.replace(/amp;/gi, '');
+      ].preview.images[0].resolutions[3].url.replace(/amp;/gi, '');
       // console.log('OK')
       setTimeout(function () {
         (title.innerText = posts[posts.length - 1 - counter]['title']), 250;
@@ -296,7 +296,7 @@ function startMeditation(url) {
         }
         image.src = posts[
           posts.length - 1 - counter
-        ].preview.images[0].resolutions[2].url.replace(/amp;/gi, '');
+        ].preview.images[0].resolutions[3].url.replace(/amp;/gi, '');
         // console.log('OK')
         setTimeout(function () {
           (title.innerText = posts[posts.length - 1 - counter]['title']), 250;
@@ -324,10 +324,10 @@ function startMeditation(url) {
         window.addEventListener('wheel', wheelScroll);
       }, 300);
       counter++;
-      // console.log(posts[posts.length-1-counter].preview.images[0].resolutions[2].url.replace(/amp;/gi,''));
+      // console.log(posts[posts.length-1-counter].preview.images[0].resolutions[3].url.replace(/amp;/gi,''));
       image.src = posts[
         posts.length - 1 - counter
-      ].preview.images[0].resolutions[2].url.replace(/amp;/gi, '');
+      ].preview.images[0].resolutions[3].url.replace(/amp;/gi, '');
       // console.log('OK')
       setTimeout(function () {
         (title.innerText = posts[posts.length - 1 - counter]['title']), 250;

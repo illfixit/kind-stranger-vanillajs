@@ -272,6 +272,7 @@ function startMeditation(url) {
   var y = [];
 
   function st(e) {
+    e.preventDefault();
     y.push(e.targetTouches[0].clientY);
   }
 

@@ -19,8 +19,6 @@ var ok = document.getElementById('ok');
 var buttons = document.getElementById('buttons');
 
 var close = document.getElementById('close');
-var screenToggle = document.getElementById('screenToggle');
-
 
 var subredditName = '';
 var after = '';
@@ -208,7 +206,6 @@ function startMeditation(url) {
 
   container.classList.add('hidden');
   image.classList.remove('hidden');
-  screenToggle.classList.remove('hidden');
 
   downloadNextPost(url);
   setTimeout(function () {
@@ -280,13 +277,6 @@ function startMeditation(url) {
     console.log(e)
     if(e.target.className === "close") {
     	document.location.reload(true);
-    }
-    if(e.target.className === "screenToggle") {
-    	if(image.style.objectFit !== "contain") {
-    		image.style.objectFit = "contain"
-    	} else {
-    		image.style.objectFit = "cover"
-    	}
     }
   }
 

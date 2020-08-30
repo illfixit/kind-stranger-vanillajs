@@ -1,21 +1,3 @@
-Skip to content
-Sign up
-eslessons
-/
-let
-Code
-Issues
-Pull requests
-Actions
-More
-let/script.js /
-@eslessons
-eslessons Decrease number of basic subreddits, turn off hiding results on image…
-…
- History
- 1 contributor
-325 lines (288 sloc)  9.41 KB
-  
 var search = document.getElementById('search');
 var image = document.getElementById('image');
 var description = document.getElementById('description');
@@ -341,6 +323,7 @@ window.addEventListener('wheel', wheelScroll);
 window.addEventListener('touchstart', st);
 window.addEventListener('touchmove', mo);
 window.addEventListener('touchend', en);
+<<<<<<< HEAD
 © 2020 GitHub, Inc.
 Terms
 Privacy
@@ -353,3 +336,5 @@ API
 Training
 Blog
 About
+=======
+>>>>>>> f098ec638cc5146ba4e61edfa4d52fe3a2a0e444

@@ -1,162 +1,76 @@
-var container = document.getElementById('container');
-var imageContainer = document.getElementById('image-container');
+var search = document.getElementById('search');
 var image = document.getElementById('image');
-var text = document.getElementById('text');
-var subredditContainer = document.getElementById('subreddit-container');
-var subreddit = document.getElementById('subreddit');
-var sorting = document.getElementById('sorting');
-var sortByHot = document.getElementById('sort-by-hot');
-var sortByNew = document.getElementById('sort-by-new');
-var sortByTopDay = document.getElementById('sort-by-top-day');
-var sortByTopWeek = document.getElementById('sort-by-top-week');
-var sortByTopMonth = document.getElementById('sort-by-top-month');
-var sortByTopYear = document.getElementById('sort-by-top-year');
-var sortByTopAll = document.getElementById('sort-by-top-all');
 var description = document.getElementById('description');
+var results = document.getElementById('results');
 var title = document.getElementById('title');
-var a = document.getElementById('a');
-var ok = document.getElementById('ok');
-var buttons = document.getElementById('buttons');
+var test = document.getElementById('test');
 
 var close = document.getElementById('close');
 var screenToggle = document.getElementById('screenToggle');
 
-
-var subredditName = '';
-var after = '';
-var sortedUrl;
 var counter = 0;
 
-function chooseSubreddit() {
-  subreddit.addEventListener('keydown', function (e) {
-    if (e.which == 13 || e.keyCode == 13 || e.key === 'Enter') {
-      if (subreddit.value) {
-        subredditName = subreddit.value.trim();
-        subreddit.value = '';
-        subreddit.classList.add('hidden');
-        buttons.classList.add('hidden');
-        subredditContainer.classList.add('hidden');
-        sorting.classList.remove('hidden');
+var basicSubreddits = `
+<div class="result">
+<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/itookapicture/</div>
+<div class="result">
+<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/aww/</div>
+<div class="result">
+<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/art/</div>
+<div class="result">
+<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/cozyplaces/</div>
+<div class="result">
+<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/portraits/</div>
+<div class="result">
+<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/paintings/</div>
+<div class="result">
+<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/eyebleach/</div>
+<div class="result">
+<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/mobilewallpapers/</div>
+<div class="result">
+<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/accidentalrenaissance/</div>
+`;
 
-        chooseTypeOfSort(subredditName);
-      }
+results.innerHTML = basicSubreddits;
+
+window.addEventListener('keydown', function (e) {
+  if (e.which == 13 || e.keyCode == 13 || e.key === 'Enter') {
+    if (search.value) {
+      counter = 0;
+      posts = [];
+      after = '';
+      results.classList.add('hidden');
+      url = `https://www.reddit.com/r/${search.value}/hot.json?`;
+      search.value = '';
+      downloadNextPost(url);
     }
-  });
-
-  ok.addEventListener('click', function () {
-    if (subreddit.value) {
-      subredditName = subreddit.value.trim();
-      subreddit.value = '';
-      subreddit.classList.add('hidden');
-      buttons.classList.add('hidden');
-      subredditContainer.classList.add('hidden');
-      sorting.classList.remove('hidden');
-
-      chooseTypeOfSort(subredditName);
-    }
-  });
-
-  buttons.addEventListener('click', function (e) {
-    if (e.target.tagName === 'BUTTON');
-    subredditName = e.target.id;
-    subreddit.value = '';
-    subreddit.classList.add('hidden');
-    buttons.classList.add('hidden');
-    subredditContainer.classList.add('hidden');
-    sorting.classList.remove('hidden');
-
-    chooseTypeOfSort(subredditName);
-  });
-
-  subreddit.addEventListener('input', function (e) {});
-}
-
-function chooseTypeOfSort(subredditName) {
-  close.classList.remove('hidden');
-
-  close.addEventListener('click', function () {
-    document.location.reload(true);
-  });
-
-  // Event Listeners
-  sortByHot.addEventListener('click', function () {
-    sorting.classList.add('hidden');
-    container.classList.add('hidden');
-    fetchImages(subredditName, 'HOT');
-  });
-
-  sortByNew.addEventListener('click', function () {
-    sorting.classList.add('hidden');
-    container.classList.add('hidden');
-    fetchImages(subredditName, 'NEW');
-  });
-
-  sortByTopDay.addEventListener('click', function () {
-    sorting.classList.add('hidden');
-    container.classList.add('hidden');
-    fetchImages(subredditName, 'TOPOFTHEDAY');
-  });
-
-  sortByTopWeek.addEventListener('click', function () {
-    sorting.classList.add('hidden');
-    container.classList.add('hidden');
-    fetchImages(subredditName, 'TOPOFTHEWEEK');
-  });
-
-  sortByTopMonth.addEventListener('click', function () {
-    sorting.classList.add('hidden');
-    container.classList.add('hidden');
-    fetchImages(subredditName, 'TOPOFTHEMONTH');
-  });
-
-  sortByTopYear.addEventListener('click', function () {
-    sorting.classList.add('hidden');
-    container.classList.add('hidden');
-    fetchImages(subredditName, 'TOPOFTHEYEAR');
-  });
-
-  sortByTopAll.addEventListener('click', function () {
-    sorting.classList.add('hidden');
-    container.classList.add('hidden');
-    fetchImages(subredditName, 'TOPOFALLTIME');
-  });
-}
-
-function fetchImages(subredditName, sortBy) {
-  sortedUrl = `https://www.reddit.com/r/${subredditName}.json?`;
-
-  switch (sortBy) {
-    case 'HOT':
-      sortedUrl = `https://www.reddit.com/r/${subredditName}.json?`;
-      break;
-    case 'NEW':
-      sortedUrl = `https://www.reddit.com/r/${subredditName}/new.json?`;
-      break;
-    case 'TOPOFTHEDAY':
-      sortedUrl = `https://www.reddit.com/r/${subredditName}/top.json?t=day`;
-      break;
-    case 'TOPOFTHEWEEK':
-      sortedUrl = `https://www.reddit.com/r/${subredditName}/top.json?t=week`;
-      break;
-    case 'TOPOFTHEMONTH':
-      sortedUrl = `https://www.reddit.com/r/${subredditName}/top.json?t=month`;
-      break;
-    case 'TOPOFTHEYEAR':
-      sortedUrl = `https://www.reddit.com/r/${subredditName}/top.json?t=year`;
-      break;
-    case 'TOPOFALLTIME':
-      sortedUrl = `https://www.reddit.com/r/${subredditName}/top.json?t=all`;
-      break;
   }
+});
 
-  startMeditation(sortedUrl);
+close.classList.remove('hidden');
+// close.addEventListener('click', function () {
+//   document.location.reload(true);
+// });
+
+image.classList.remove('hidden');
+
+var startUrl = `https://www.reddit.com/r/mobilewallpapers.json?`;
+var after = '';
+var posts = [];
+
+function start() {
+  downloadNextPost(startUrl);
+  url = startUrl;
+  setTimeout(function () {
+    description.classList.remove('hidden');
+  }, 500);
 }
 
-var posts = [];
-var imgArr = [];
-var limit = 1;
+start();
 
 function downloadNextPost(url) {
+  // console.log(`downloadNextPost(url) => ${url}&limit=1&after=${after}`);
+  // test.innerText = `${url}&limit=1&after=${after}`;
   var nextPost = new XMLHttpRequest();
   nextPost.open('GET', `${url}&limit=1&after=${after}`);
 
@@ -188,178 +102,233 @@ function downloadNextPost(url) {
         /amp;/gi,
         ''
       );
-      // console.log('OK')
       setTimeout(function () {
-        (title.innerText = posts[posts.length - 1]['title']), 250;
+        (title.innerText = posts[posts.length - 1]['title'].trim()), 250;
       });
-      console.log(posts[posts.length - 1]['title']);
-      console.log(
-        `https://www.reddit.com${posts[posts.length - 1]['permalink']}`
-      );
       a.href = `https://www.reddit.com${posts[posts.length - 1]['permalink']}`;
     }
   };
 }
 
-function startMeditation(url) {
-  close.addEventListener('click', function () {
-    document.location.reload(true);
-  });
+function searchSubreddits(s) {
+  // console.log(s);
+  var listOfSubreddits = new XMLHttpRequest();
+  listOfSubreddits.open(
+    'GET',
+    `https://www.reddit.com/api/subreddit_autocomplete_v2.json?query=${s}&raw_json=1&gilding_detail=1&limit=10`
+  );
 
-  container.classList.add('hidden');
-  image.classList.remove('hidden');
-  screenToggle.classList.remove('hidden');
+  listOfSubreddits.responseType = 'json';
+  listOfSubreddits.send();
 
-  downloadNextPost(url);
-  setTimeout(function () {
-    description.classList.remove('hidden');
-  }, 800);
+  listOfSubreddits.onerror = function (e) {
+    console.log(e);
+    // setTimeout(function () {
+    //   document.location.reload(true);
+    // }, 1000);
+  };
 
-  function wheelScroll(e) {
-    if (event.deltaY > 0) {
-      if (counter > 0) {
-        counter--;
-        if (counter > posts.length - 1) {
-          counter = posts.length - 2;
-        }
-        image.src = posts[
-          posts.length - 1 - counter
-        ].preview.images[0].resolutions[3].url.replace(/amp;/gi, '');
-        // console.log('OK')
-        setTimeout(function () {
-          (title.innerText = posts[posts.length - 1 - counter]['title']), 250;
-        });
-        console.log(posts[posts.length - 1 - counter]['title']);
-        console.log(
-          `https://www.reddit.com${
-            posts[posts.length - 1 - counter]['permalink']
-          }`
-        );
-        a.href = `https://www.reddit.com${
-          posts[posts.length - 1 - counter]['permalink']
-        }`;
-      } else {
-        counter = 0;
-        window.removeEventListener('wheel', wheelScroll);
-        setTimeout(function () {
-          window.addEventListener('wheel', wheelScroll);
-        }, 300);
-        downloadNextPost(url);
-      }
-    } else if (event.deltaY < 0) {
-      window.removeEventListener('wheel', wheelScroll);
-      setTimeout(function () {
-        window.addEventListener('wheel', wheelScroll);
-      }, 300);
-      counter++;
-      // console.log(posts[posts.length-1-counter].preview.images[0].resolutions[3].url.replace(/amp;/gi,''));
-      image.src = posts[
-        posts.length - 1 - counter
-      ].preview.images[0].resolutions[3].url.replace(/amp;/gi, '');
-      // console.log('OK')
-      setTimeout(function () {
-        (title.innerText = posts[posts.length - 1 - counter]['title']), 250;
-      });
-      console.log(posts[posts.length - 1 - counter]['title']);
-      a.href = `https://www.reddit.com${
-        posts[posts.length - 1 - counter]['permalink']
-      }`;
-      console.log(
-        `https://www.reddit.com${
-          posts[posts.length - 1 - counter]['permalink']
-        }`
-      );
-    }
-  }
+  listOfSubreddits.onload = function () {
+    results.innerHTML = '';
+    // console.log(listOfSubreddits.response.data.children);
 
-  var y = [];
+    var list = listOfSubreddits.response.data.children;
 
-  function st(e) {
-    e.preventDefault();
-    y.push(e.targetTouches[0].clientY);
-    console.log(e)
-    if(e.target.className === "close") {
-    	document.location.reload(true);
-    }
-    if(e.target.className === "screenToggle") {
-    	if(image.style.objectFit !== "contain") {
-    		image.style.objectFit = "contain"
-    	} else {
-    		image.style.objectFit = "cover"
-    	}
-    }
-  }
+    list.forEach(function (element) {
+      var imageSource = element.data.community_icon
+        ? element.data.community_icon
+        : `https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png`;
 
-  function mo(e) {
-    y.push(e.targetTouches[0].clientY);
-  }
-
-  function en(e) {
-    var delta = y[0] - y[y.length - 1];
-    y = [];
-
-    if (delta > 0) {
-      if (counter > 0) {
-        counter--;
-        if (counter > posts.length - 1) {
-          counter = posts.length - 2;
-        }
-        image.src = posts[
-          posts.length - 1 - counter
-        ].preview.images[0].resolutions[3].url.replace(/amp;/gi, '');
-        // console.log('OK')
-        setTimeout(function () {
-          (title.innerText = posts[posts.length - 1 - counter]['title']), 250;
-        });
-        console.log(posts[posts.length - 1 - counter]['title']);
-        console.log(
-          `https://www.reddit.com${
-            posts[posts.length - 1 - counter]['permalink']
-          }`
-        );
-        a.href = `https://www.reddit.com${
-          posts[posts.length - 1 - counter]['permalink']
-        }`;
-      } else {
-        counter = 0;
-        window.removeEventListener('wheel', wheelScroll);
-        setTimeout(function () {
-          window.addEventListener('wheel', wheelScroll);
-        }, 300);
-        downloadNextPost(url);
-      }
-    } else if (delta < 0) {
-      window.removeEventListener('wheel', wheelScroll);
-      setTimeout(function () {
-        window.addEventListener('wheel', wheelScroll);
-      }, 300);
-      counter++;
-      // console.log(posts[posts.length-1-counter].preview.images[0].resolutions[3].url.replace(/amp;/gi,''));
-      image.src = posts[
-        posts.length - 1 - counter
-      ].preview.images[0].resolutions[3].url.replace(/amp;/gi, '');
-      // console.log('OK')
-      setTimeout(function () {
-        (title.innerText = posts[posts.length - 1 - counter]['title']), 250;
-      });
-      console.log(posts[posts.length - 1 - counter]['title']);
-      a.href = `https://www.reddit.com${
-        posts[posts.length - 1 - counter]['permalink']
-      }`;
-      console.log(
-        `https://www.reddit.com${
-          posts[posts.length - 1 - counter]['permalink']
-        }`
-      );
-    }
-  }
-
-  // Mouse Wheel Scroll
-  window.addEventListener('wheel', wheelScroll);
-
-  window.addEventListener('touchstart', st);
-  window.addEventListener('touchmove', mo);
-  window.addEventListener('touchend', en);
+      element.data.url == null
+        ? null
+        : (results.innerHTML += `<div class="result">
+        <img src="${imageSource}" style="width: 1.5rem; height: 1.5rem;">
+        ${element.data.url}</div>`);
+    });
+  };
 }
 
-chooseSubreddit();
+function hello(e) {
+  counter = 0;
+  posts = [];
+  after = '';
+  search.value = '';
+  results.classList.add('hidden');
+  url = `https://www.reddit.com${e.innerText.trim()}hot.json?`;
+  downloadNextPost(url);
+}
+
+document.addEventListener('dblclick', function () {
+  if (image.style.objectFit !== 'contain') {
+    image.style.objectFit = 'contain';
+  } else {
+    image.style.objectFit = 'cover';
+  }
+});
+
+function wheelScroll(e) {
+  if (event.deltaY > 0) {
+    if (counter > 0) {
+      counter--;
+      if (counter > posts.length - 1) {
+        counter = posts.length - 2;
+      }
+      image.src = posts[
+        posts.length - 1 - counter
+      ].preview.images[0].resolutions[3].url.replace(/amp;/gi, '');
+      // console.log('OK')
+      setTimeout(function () {
+        (title.innerText = posts[posts.length - 1 - counter]['title']), 250;
+      });
+      // console.log(posts[posts.length - 1 - counter]['title']);
+      // console.log(
+      //   `https://www.reddit.com${
+      //     posts[posts.length - 1 - counter]['permalink']
+      //   }`
+      // );
+      a.href = `https://www.reddit.com${
+        posts[posts.length - 1 - counter]['permalink']
+      }`;
+    } else {
+      counter = 0;
+      window.removeEventListener('wheel', wheelScroll);
+      setTimeout(function () {
+        window.addEventListener('wheel', wheelScroll);
+      }, 300);
+      downloadNextPost(url);
+    }
+  } else if (event.deltaY < 0) {
+    window.removeEventListener('wheel', wheelScroll);
+    setTimeout(function () {
+      window.addEventListener('wheel', wheelScroll);
+    }, 300);
+    counter++;
+    // console.log(posts[posts.length-1-counter].preview.images[0].resolutions[3].url.replace(/amp;/gi,''));
+    image.src = posts[
+      posts.length - 1 - counter
+    ].preview.images[0].resolutions[3].url.replace(/amp;/gi, '');
+    // console.log('OK')
+    setTimeout(function () {
+      (title.innerText = posts[posts.length - 1 - counter]['title']), 250;
+    });
+    // console.log(posts[posts.length - 1 - counter]['title']);
+    a.href = `https://www.reddit.com${
+      posts[posts.length - 1 - counter]['permalink']
+    }`;
+    // console.log(
+    //   `https://www.reddit.com${posts[posts.length - 1 - counter]['permalink']}`
+    // );
+  }
+}
+
+var y = [];
+
+search.addEventListener('input', function (e) {
+  results.classList.remove('hidden');
+  searchSubreddits(e.target.value);
+});
+
+function st(e) {
+  // test.innerText = e.target.className;
+
+  if (e.target.className === 'search') {
+    search.focus();
+    // console.log('search');
+    if (results.innerHTML == '') {
+      results.innerHTML = basicSubreddits;
+    }
+    results.classList.remove('hidden');
+  }
+
+  if (e.target.className === 'image') {
+    results.classList.add('hidden');
+    e.preventDefault();
+    y.push(e.targetTouches[0].clientY);
+  }
+
+  if (e.target.className === 'result') {
+    // test.innerText = 'result';
+    var sub = e.target.innerText;
+    counter = 0;
+    posts = [];
+    after = '';
+    search.value = '';
+    results.classList.add('hidden');
+    url = `https://www.reddit.com${sub.trim()}hot.json?`;
+    results.innerHTML = '';
+    downloadNextPost(url);
+  }
+
+  if (e.target.className === 'close') {
+    document.location.reload(true);
+  }
+}
+
+function mo(e) {
+  y.push(e.targetTouches[0].clientY);
+}
+
+function en(e) {
+  var delta = y[0] - y[y.length - 1];
+  y = [];
+
+  if (delta > 0) {
+    if (counter > 0) {
+      counter--;
+      if (counter > posts.length - 1) {
+        counter = posts.length - 2;
+      }
+      image.src = posts[
+        posts.length - 1 - counter
+      ].preview.images[0].resolutions[3].url.replace(/amp;/gi, '');
+      // console.log('OK')
+      setTimeout(function () {
+        (title.innerText = posts[posts.length - 1 - counter]['title']), 250;
+      });
+      // console.log(posts[posts.length - 1 - counter]['title']);
+      // console.log(
+      //   `https://www.reddit.com${
+      //     posts[posts.length - 1 - counter]['permalink']
+      //   }`
+      // );
+      a.href = `https://www.reddit.com${
+        posts[posts.length - 1 - counter]['permalink']
+      }`;
+    } else {
+      counter = 0;
+      window.removeEventListener('wheel', wheelScroll);
+      setTimeout(function () {
+        window.addEventListener('wheel', wheelScroll);
+      }, 300);
+      downloadNextPost(url);
+    }
+  } else if (delta < 0) {
+    window.removeEventListener('wheel', wheelScroll);
+    setTimeout(function () {
+      window.addEventListener('wheel', wheelScroll);
+    }, 300);
+    counter++;
+    // console.log(posts[posts.length-1-counter].preview.images[0].resolutions[3].url.replace(/amp;/gi,''));
+    image.src = posts[
+      posts.length - 1 - counter
+    ].preview.images[0].resolutions[3].url.replace(/amp;/gi, '');
+    // console.log('OK')
+    setTimeout(function () {
+      (title.innerText = posts[posts.length - 1 - counter]['title']), 250;
+    });
+    // console.log(posts[posts.length - 1 - counter]['title']);
+    a.href = `https://www.reddit.com${
+      posts[posts.length - 1 - counter]['permalink']
+    }`;
+    // console.log(
+    //   `https://www.reddit.com${posts[posts.length - 1 - counter]['permalink']}`
+    // );
+  }
+}
+
+// Mouse Wheel Scroll
+window.addEventListener('wheel', wheelScroll);
+
+window.addEventListener('touchstart', st);
+window.addEventListener('touchmove', mo);
+window.addEventListener('touchend', en);

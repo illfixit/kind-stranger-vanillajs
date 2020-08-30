@@ -10,168 +10,24 @@
   <body>
     <button id="close" class="close hidden">x</button>
 
-    <div id="container" class="container">
-      <div id="subreddit-container" class="subreddit-container">
-        Enter the name of subreddit...<br />
-        <input id="subreddit" autofocus />
-        <button id="ok" style="background-color: rgba(0, 150, 0, 0.2);">
-          Go
-        </button>
-        <div id="buttons" class="buttons">
-          <p>Or choose one:</p>
-          <button
-            id="itookapicture"
-            style="background-color: rgba(150, 238, 146, 0.35);"
-          >
-            I Took a Picture
-          </button>
-          <button id="aww" style="background-color: rgba(185, 102, 84, 0.35);">
-            Aww
-          </button>
-          <button id="art" style="background-color: rgba(102, 93, 2, 0.35);">
-            Art
-          </button>
-          <button
-            id="cozyplaces"
-            style="background-color: rgba(197, 198, 6, 0.35);"
-          >
-            Cozy Places
-          </button>
-          <button
-            id="portraits"
-            style="background-color: rgba(51, 226, 202, 0.35);"
-          >
-            Portraits
-          </button>
-          <button
-            id="paintings"
-            style="background-color: rgba(99, 115, 186, 0.35);"
-          >
-            Paintings
-          </button>
-          <button
-            id="crappydesign"
-            style="background-color: rgba(111, 42, 71, 0.35);"
-          >
-            CrappyDesign
-          </button>
-          <button
-            id="eyebleach"
-            style="background-color: rgba(170, 131, 181, 0.35);"
-          >
-            Eyebleach
-          </button>
-          <button id="food" style="background-color: rgba(226, 241, 90, 0.35);">
-            Food
-          </button>
-          <button
-            id="woodworking"
-            style="background-color: rgba(176, 156, 174, 0.35);"
-          >
-            Woodworking
-          </button>
-          <button id="cats" style="background-color: rgba(182, 126, 98, 0.35);">
-            Cats
-          </button>
-          <button
-            id="nostalgia"
-            style="background-color: rgba(50, 191, 174, 0.35);"
-          >
-            Nostalgia
-          </button>
-          <button
-            id="succulents"
-            style="background-color: rgba(128, 12, 149, 0.35);"
-          >
-            Succulents
-          </button>
-          <button
-            id="mobilewallpapers"
-            style="background-color: rgba(243, 100, 72, 0.35);"
-          >
-            Mobile Wallpapers
-          </button>
-          <button
-            id="watches"
-            style="background-color: rgba(12, 141, 198, 0.35);"
-          >
-            Watches
-          </button>
-          <button
-            id="accidentalrenaissance"
-            style="background-color: rgba(125, 14, 198, 0.35);"
-          >
-            Accidental Renaissance</button
-          ><br />
-        </div>
-      </div>
-
-
-
-
-      <div id="sorting" class="sorting hidden">
-        Sorting by: <br><br>
-        <button
-          id="sort-by-hot"
-          style="background-color: rgba(255, 0, 0, 0.4);"
-        >
-          Hot
-        </button>
-
-       <button
-          id="sort-by-top-all"
-          style="background-color: rgba(150, 0, 230, 0.4);"
-        >
-          Top of all time
-        </button>
-
-        <button
-          id="sort-by-top-year"
-          style="background-color: rgba(99, 115, 186, 0.4);"
-        >
-          Top of the year
-        </button>
-
-        <button
-          id="sort-by-top-month"
-          style="background-color: rgba(176, 156, 174, 0.4);"
-        >
-          Top of the month
-        </button>
-
-        <button
-          id="sort-by-top-week"
-          style="background-color: rgba(50, 191, 174, 0.4);"
-        >
-          Top of the week
-        </button>
-
-        <button
-          id="sort-by-top-day"
-          style="background-color: rgba(243, 100, 72, 0.4);"
-        >
-          Top of the day
-        </button>
-
-        <button
-          id="sort-by-new"
-          style="background-color: rgba(125, 14, 198, 0.4);"
-        >
-          New
-        </button>
-      </div>
+    <div>
+      <input id="search" class="search" placeholder="Search..." />
     </div>
 
+    <div id="results" class="results hidden"></div>
+    <div id="test" class="test"></div>
     <img
       id="image"
       src="https://cdn.lowgif.com/full/e1607cb505c3ee61-lisuje-lil-transparent-loading-sam-gif-d-i-jacksepticeye.gif"
       class="image hidden"
     />
+
     <div class="description hidden" id="description">
       <a href="" id="a">
         <div class="title" id="title"></div>
       </a>
     </div>
+
     <script src="script.js"></script>
   </body>
 </html>

@@ -44,7 +44,7 @@ body {
   left: 0px;
   position: fixed;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
   z-index: -100;
 }
 
@@ -105,10 +105,9 @@ input {
 .result {
   width: auto;
   height: 2rem;
-  /* border: 1px solid rgba(110, 110, 110, 0.1); */
+  font-size: 1.2rem;
   padding: 0.3rem;
   margin-bottom: 1.2rem;
-  /* background-color: rgba(0, 0, 0, 0.8); */
   z-index: 100;
 }
 

@@ -12,14 +12,15 @@ var counter = 0;
 
 var basicSubreddits = `
 <div class="result">
-<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/itookapicture/</div>
+<img src="https://styles.redditmedia.com/t5_2r1tc/styles/communityIcon_p1gzakhq6y201.png" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">/r/itookapicture/</div>
 <div class="result">
-<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/aww/</div>
+<img src="https://styles.redditmedia.com/t5_2qh1o/styles/communityIcon_vzx333xor7101.png" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">/r/aww/</div>
 <div class="result">
-<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/art/</div>
+<img src="https://b.thumbs.redditmedia.com/VoZlOfOxgNGkqayUrmGI96XuSOGKVT-MVI4WK-CXP3o.png" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">/r/art/</div>
 <div class="result">
-<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/cozyplaces/</div>
+<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">/r/cozyplaces/</div>
 <div class="result">
+<img src="https://a.thumbs.redditmedia.com/bDWcvO6mkX1TIcTnrO-N-5QJPUaWaq6nnQFel3kywD8.png" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">/r/food/</div>
 `;
 
 results.innerHTML = basicSubreddits;
@@ -106,7 +107,7 @@ function searchSubreddits(s) {
   var listOfSubreddits = new XMLHttpRequest();
   listOfSubreddits.open(
     'GET',
-    `https://www.reddit.com/api/subreddit_autocomplete_v2.json?query=${s}&raw_json=1&gilding_detail=1&limit=10`
+    `https://www.reddit.com/api/subreddit_autocomplete_v2.json?query=${s}&raw_json=1&gilding_detail=1`
   );
 
   listOfSubreddits.responseType = 'json';
@@ -128,12 +129,14 @@ function searchSubreddits(s) {
     list.forEach(function (element) {
       var imageSource = element.data.community_icon
         ? element.data.community_icon
-        : `https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png`;
+        : element.data.icon_img ||
+          `https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png`;
 
+      console.log(element.data.url, imageSource);
       element.data.url == null
         ? null
         : (results.innerHTML += `<div class="result">
-        <img src="${imageSource}" style="width: 1.5rem; height: 1.5rem;">
+        <img src="${imageSource}" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
         ${element.data.url}</div>`);
     });
   };
@@ -150,10 +153,10 @@ function hello(e) {
 }
 
 document.addEventListener('dblclick', function () {
-  if (image.style.objectFit !== 'contain') {
-    image.style.objectFit = 'contain';
-  } else {
+  if (image.style.objectFit != 'cover') {
     image.style.objectFit = 'cover';
+  } else {
+    image.style.objectFit = 'contain';
   }
 });
 
@@ -232,7 +235,7 @@ function st(e) {
   }
 
   if (e.target.className === 'image') {
-    // results.classList.add('hidden');
+    results.classList.add('hidden');
     e.preventDefault();
     y.push(e.targetTouches[0].clientY);
   }

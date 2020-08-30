@@ -323,18 +323,3 @@ window.addEventListener('wheel', wheelScroll);
 window.addEventListener('touchstart', st);
 window.addEventListener('touchmove', mo);
 window.addEventListener('touchend', en);
-<<<<<<< HEAD
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-=======
->>>>>>> f098ec638cc5146ba4e61edfa4d52fe3a2a0e444

@@ -69,14 +69,12 @@ body {
 }
 
 input {
-  position: fixed;
   border: none;
   color: #ccc;
   background-color: rgba(0, 0, 0, 0.35);
   outline: none;
   /* position: relative; */
   top: 0;
-  left: 0;
   text-align: left;
   font-size: 1.2rem;
   font-weight: bold;
@@ -95,8 +93,6 @@ input {
 }
 
 .results {
-  position: fixed;
-  top: 3.5rem;
   width: 100vw;
   height: auto;
   background-color: rgba(0, 0, 0, 0.3);

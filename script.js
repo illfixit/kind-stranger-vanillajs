@@ -1,3 +1,21 @@
+Skip to content
+Sign up
+eslessons
+/
+let
+Code
+Issues
+Pull requests
+Actions
+More
+let/script.js /
+@eslessons
+eslessons Decrease number of basic subreddits, turn off hiding results on image…
+…
+ History
+ 1 contributor
+325 lines (288 sloc)  9.41 KB
+  
 var search = document.getElementById('search');
 var image = document.getElementById('image');
 var description = document.getElementById('description');
@@ -14,12 +32,12 @@ var basicSubreddits = `
 <div class="result">
 <img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/itookapicture/</div>
 <div class="result">
-<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/art/</div>
-<div class="result">
 <img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/aww/</div>
 <div class="result">
-<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/eyebleach/</div>
+<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/art/</div>
+<div class="result">
 <img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/cozyplaces/</div>
+<div class="result">
 `;
 
 results.innerHTML = basicSubreddits;
@@ -232,7 +250,7 @@ function st(e) {
   }
 
   if (e.target.className === 'image') {
-    results.classList.add('hidden');
+    // results.classList.add('hidden');
     e.preventDefault();
     y.push(e.targetTouches[0].clientY);
   }
@@ -323,3 +341,15 @@ window.addEventListener('wheel', wheelScroll);
 window.addEventListener('touchstart', st);
 window.addEventListener('touchmove', mo);
 window.addEventListener('touchend', en);
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

@@ -20,15 +20,6 @@ var basicSubreddits = `
 <div class="result">
 <img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/cozyplaces/</div>
 <div class="result">
-<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/portraits/</div>
-<div class="result">
-<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/paintings/</div>
-<div class="result">
-<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/eyebleach/</div>
-<div class="result">
-<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/mobilewallpapers/</div>
-<div class="result">
-<img src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png" style="width: 1.5rem; height: 1.5rem;">/r/accidentalrenaissance/</div>
 `;
 
 results.innerHTML = basicSubreddits;
@@ -241,7 +232,7 @@ function st(e) {
   }
 
   if (e.target.className === 'image') {
-    results.classList.add('hidden');
+    // results.classList.add('hidden');
     e.preventDefault();
     y.push(e.targetTouches[0].clientY);
   }

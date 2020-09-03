@@ -46,7 +46,7 @@ close.classList.remove('hidden');
 
 image.classList.remove('hidden');
 
-var startUrl = `https://www.reddit.com/r/mobilewallpapers.json?`;
+var startUrl = `https://www.reddit.com/r/pics.json?`;
 var after = '';
 var posts = [];
 
@@ -326,3 +326,7 @@ window.addEventListener('wheel', wheelScroll);
 window.addEventListener('touchstart', st);
 window.addEventListener('touchmove', mo);
 window.addEventListener('touchend', en);
+image.addEventListener('click', function () {
+  search.classList.toggle('hidden');
+  description.classList.toggle('hidden');
+});

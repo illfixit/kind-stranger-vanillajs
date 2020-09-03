@@ -48,33 +48,17 @@ body {
   z-index: -100;
 }
 
-.screenToggle {
-  background-color: rgba(225, 225, 225, 0.35);
-  border-color: rgba(255, 255, 255, 0.5);
-  position: fixed;
-  opacity: 0.5;
-  width: 3rem;
-  height: 3rem;
-  font-size: 1.2rem;
-  border-radius: 50%;
-  top: 1rem;
-  left: 1rem;
-  text-align: center;
-  z-index: 100;
-  outline: none;
-}
-
 .hidden {
   display: none !important;
 }
 
 input {
   border: none;
+  border-radius: 0%;
   color: #ccc;
   background-color: rgba(0, 0, 0, 0.35);
   outline: none;
-  /* position: relative; */
-  top: 0;
+  top: 100px;
   text-align: left;
   font-size: 1.2rem;
   font-weight: bold;
@@ -140,7 +124,7 @@ a {
   color: #ccc;
   border: none;
   z-index: 120;
-  cursor: pointer;
+  /* cursor: pointer; */
   outline: none;
   top: 0;
   right: 0;

@@ -46,7 +46,7 @@ close.classList.remove('hidden');
 
 image.classList.remove('hidden');
 
-var startUrl = `https://www.reddit.com/r/pics.json?`;
+var startUrl = `https://www.reddit.com/r/itookapicture/top.json?t=all&`;
 var after = '';
 var posts = [];
 
@@ -54,8 +54,21 @@ function start() {
   downloadNextPost(startUrl);
   url = startUrl;
   setTimeout(function () {
-    description.classList.remove('hidden');
-  }, 500);
+    var p = document.createElement('p');
+    p.classList.add('welcome');
+    p.innerHTML = `<br/>
+    <strong>Welcome to my mobile Reddit viewer.</strong><br/><br/><strong>Tap once</strong> to hide/show interface.<br/><br/> <strong>Tap twice</strong> to change the scale of images.<br/><br/><strong>Tap here</strong> to start<br/><br/><hr/>
+    <a href="https://github.com/eslessons/let" style="color: lightyellow;">GitHub Repository</a><hr/>`;
+    p.addEventListener('click', function () {
+      p.style.display = 'none';
+      search.classList.remove('blurred');
+      image.classList.remove('blurred');
+      description.classList.remove('blurred');
+      document.getElementById('swipe').classList.remove('hidden');
+    });
+
+    document.body.appendChild(p);
+  }, 10);
 }
 
 start();
@@ -216,6 +229,7 @@ search.addEventListener('input', function (e) {
 
 function st(e) {
   // test.innerText = e.target.className;
+  document.getElementById('swipe').classList.add('hidden');
 
   if (e.target.className === 'search') {
     search.focus();
@@ -319,10 +333,10 @@ var dClick = false;
 
 function doubleClick(e) {
   dClick = true;
-  if (image.style.objectFit != 'cover') {
-    image.style.objectFit = 'cover';
-  } else {
+  if (image.style.objectFit != 'contain') {
     image.style.objectFit = 'contain';
+  } else {
+    image.style.objectFit = 'cover';
   }
   setTimeout(function () {
     dClick = false;
@@ -330,6 +344,7 @@ function doubleClick(e) {
 }
 
 function singleClick(e) {
+  document.getElementById('swipe').classList.add('hidden');
   setTimeout(function () {
     if (!dClick) {
       search.classList.toggle('hidden');

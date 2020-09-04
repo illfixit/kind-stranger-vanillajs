@@ -27,7 +27,7 @@ body {
   display: flex;
 
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
   /* margin: auto; */
 }
@@ -44,7 +44,7 @@ body {
   left: 0px;
   position: fixed;
   display: block;
-  object-fit: contain;
+  object-fit: cover;
   z-index: -100;
 }
 
@@ -55,10 +55,12 @@ body {
 input {
   border: none;
   border-radius: 0%;
-  color: #ccc;
+  color: white;
   background-color: rgba(0, 0, 0, 0.35);
   outline: none;
-  top: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
   text-align: left;
   font-size: 1.2rem;
   font-weight: bold;
@@ -71,13 +73,15 @@ input {
 
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #aaa;
+  color: white;
   opacity: 1; /* Firefox */
   font-size: 1rem;
 }
 
 .results {
   width: 100vw;
+  position: fixed;
+  top: 3.5rem;
   height: auto;
   background-color: rgba(0, 0, 0, 0.3);
   color: #fff;
@@ -131,4 +135,28 @@ a {
   font-weight: bold;
   height: 3rem;
   width: 3rem;
+}
+
+.swipe {
+  object-fit: contain;
+  position: fixed;
+  bottom: 7rem;
+  max-height: auto;
+  max-width: 10vw;
+  filter: invert(1);
+}
+
+.welcome {
+  border-radius: 20px;
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  max-width: 90vw;
+  color: white;
+  z-index: 300;
+}
+
+.blurred {
+  filter: blur(150px);
 }

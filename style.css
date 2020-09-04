@@ -148,6 +148,7 @@ a {
   max-width: 90vw;
   color: black;
   z-index: 300;
+  transform: translateY(-38px);
 }
 
 .blurred {

@@ -1,1 +1,1 @@
-Let
+Thanks for the gold!

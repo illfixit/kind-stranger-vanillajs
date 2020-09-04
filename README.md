@@ -1,1 +1,0 @@
-Thanks for the gold!

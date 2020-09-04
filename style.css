@@ -158,5 +158,5 @@ a {
 }
 
 .blurred {
-  filter: blur(150px);
+  filter: blur(25px) brightness(1.3);
 }

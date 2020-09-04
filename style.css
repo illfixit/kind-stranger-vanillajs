@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
 * {
   box-sizing: border-box;
   -webkit-overflow-scrolling: none;
@@ -5,21 +7,12 @@
 }
 
 body {
-  /* background: #e1e1e1
-    url('https://unsplash.com/photos/sbcIAn4Mn14/download?force=true&w=640')
-    center center; */
-
-  /* background-size: cover; */
   -webkit-overflow-scrolling: none;
-  /* background-color: rgb(53, 50, 50); */
   background-color: #111;
   color: #fff;
-  font-family: sans-serif;
-
-  min-height: 100vh;
+  font-family: 'Lato', sans-serif;  min-height: 100vh;
   min-width: 100vw;
   overflow: hidden;
-
   position: fixed;
   top: -10px;
   left: -10px;
@@ -149,14 +142,14 @@ a {
 .welcome {
   border-radius: 20px;
   padding: 1.5rem;
-  font-size: 1.5rem;
-  background-color: rgba(0, 0, 0, 0.7);
+  font-size: 1.2rem;
+  background-color: rgba(255, 255, 255, 0.7);
   text-align: center;
   max-width: 90vw;
-  color: white;
+  color: black;
   z-index: 300;
 }
 
 .blurred {
-  filter: blur(25px) brightness(1.3);
+  filter: blur(15px) grayscale(80%);
 }

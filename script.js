@@ -56,8 +56,8 @@ function start() {
     var p = document.createElement('p');
     p.classList.add('welcome');
     p.innerHTML = `<br/>
-    <strong>Welcome to my mobile Reddit viewer.</strong><br/><br/><strong>Tap once</strong> to hide/show interface.<br/><br/> <strong>Tap twice</strong> to change the scale of images.<br/><br/>>>> <strong> Tap here to start </strong> <<< <br/><br/><hr/>
-    <a href="https://github.com/eslessons/let" style="color: lightyellow;">GitHub Repository</a><hr/>`;
+    <strong>Welcome to my mobile Reddit viewer... <br/>Kind Stranger.</strong><br/><br/><strong>Tap once</strong> to hide/show interface.<br/><br/> <strong>Tap twice</strong> to change the scale of images.<br/><br/>>>> <strong> Tap here to start </strong> <<< <br/><br/><hr/>
+    <a href="https://github.com/eslessons/kind-stranger" style="color: CHOCOLATE;">GitHub Repository</a><hr/>`;
     p.addEventListener('click', function () {
       p.style.display = 'none';
       search.classList.remove('blurred');

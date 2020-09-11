@@ -45,7 +45,7 @@ window.addEventListener('keydown', function (e) {
 
 image.classList.remove('hidden');
 
-var startUrl = `https://www.reddit.com/r/itookapicture/top.json?t=all&`;
+var startUrl = `https://www.reddit.com/r/itookapicture/hot.json?`;
 var after = '';
 var posts = [];
 

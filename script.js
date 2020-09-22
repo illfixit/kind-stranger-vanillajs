@@ -205,9 +205,9 @@ function touchMoveHandler(e) {
   var delta = x[0] - x[x.length - 1];
   x = [];
 
-  if (delta > 30) {
+  if (delta > 10) {
     getNextPost();
-  } else if (delta < -30) {
+  } else if (delta < -10) {
     getPreviousPost();
   }
 }

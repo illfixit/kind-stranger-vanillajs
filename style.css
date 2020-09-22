@@ -27,11 +27,15 @@ body {
 
 .os-viewport {
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
   -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 .image {
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   top: 0px;
   left: 0px;
@@ -152,5 +156,5 @@ a {
 }
 
 .blurred {
-  filter: blur(15px) grayscale(80%);
+  filter: blur(15px);
 }

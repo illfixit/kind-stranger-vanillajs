@@ -151,14 +151,7 @@ var x = [];
 var previousTouch = 0;
 
  function touchStartHandler(e) {
-  if((e.timeStamp - previousTouch) < 300) {
-    // console.log('dclick '+ (e.timeStamp - previousTouch))
-    if (image.style.objectFit != 'contain') {
-      image.style.objectFit = 'contain';
-    } else {
-      image.style.objectFit = 'cover';
-    }
-  }
+
   previousTouch = e.timeStamp
   document.getElementById('swipe').classList.add('hidden');
 
@@ -205,9 +198,9 @@ function touchMoveHandler(e) {
   var delta = x[0] - x[x.length - 1];
   x = [];
 
-  if (delta > 10) {
+  if (delta > 0) {
     getNextPost();
-  } else if (delta < -10) {
+  } else if (delta < 0) {
     getPreviousPost();
   }
 }
@@ -337,3 +330,13 @@ function wheelScroll(e) {
 
 // Mouse Wheel Scroll
 window.addEventListener('wheel', wheelScroll);
+
+function scaleChange(e) {
+  if (image.style.objectFit != 'contain') {
+    image.style.objectFit = 'contain';
+  } else {
+    image.style.objectFit = 'cover';
+  }
+}
+
+image.addEventListener('dblclick', scaleChange);

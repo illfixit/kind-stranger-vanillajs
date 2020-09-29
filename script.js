@@ -49,7 +49,7 @@ close.addEventListener('click', reload);
 
 image.classList.remove('hidden');
 
-var startUrl = `https://www.reddit.com/r/oddlysatisfying/hot.json?`;
+var startUrl = `https://www.reddit.com/r/itookapicture/hot.json?`;
 var after = '';
 var posts = [];
 

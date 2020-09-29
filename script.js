@@ -1,5 +1,6 @@
 var search = document.getElementById('search');
 var image = document.getElementById('image');
+var video = document.getElementById('video');
 var description = document.getElementById('description');
 var results = document.getElementById('results');
 var title = document.getElementById('title');
@@ -48,7 +49,7 @@ close.addEventListener('click', reload);
 
 image.classList.remove('hidden');
 
-var startUrl = `https://www.reddit.com/r/itookapicture/hot.json?`;
+var startUrl = `https://www.reddit.com/r/oddlysatisfying/hot.json?`;
 var after = '';
 var posts = [];
 
@@ -74,39 +75,95 @@ function downloadNextPost(url) {
   nextPost.onload = function () {
     after = nextPost.response.data.after;
     var post = nextPost.response.data.children[0].data;
+    // console.log(post);
+    // console.log(post.preview.images[0]);
+
 
     try {
-      if (post.preview.images[0].resolutions) {
-        
-          posts.push(post);
-          // console.log(post);
-          showPost(post);
-
+    if (post.preview.images[0] != null || post.domain.includes('imgur') || post.url.includes('jpg')) {
+      // if(!post.domain.includes('gfycat') && !post.url.includes('gfycat') && !post.url.includes('youtu')) {
+      if(!post.url.includes('youtu')) {
+      
+        posts.push(post);
+        // console.log(post);
+        showPost(post);
+        // console.log("push!", post.url)
       } else {
         console.log('next');
         downloadNextPost(url);
       }
-    } catch { 
+
+    } else {
+      console.log('next');
+      downloadNextPost(url);
+    }
+  } catch {
     console.log('next');
     downloadNextPost(url);
   }
   };
 }
 
+
+
+
+
  function showPost(post) {
-  // debugger;
-  // console.log(post.title)
   try {
     image.src = post.preview.images[0].resolutions[post.preview.images[0].resolutions.length-1].url.replace(
       /amp;/gi,
       ''
     );
+    video.classList.add('hidden');
+
+    if(post.crosspost_parent != null) {
+      console.log("post.crosspost_parent")
+      post = post.crosspost_parent_list[0]
+      if(post.url.includes(".gifv")) {
+        video.src = post.url.replace('gifv', 'mp4');
+        video.classList.remove('hidden');
+      } else if (post.url.includes(".gif")) {
+        video.src = post.url.replace('gif', 'mp4');
+        video.classList.remove('hidden');
+      } else {
+        if(post.media.reddit_video != null) {
+          video.src = post.media.reddit_video.fallback_url;
+          video.classList.remove('hidden');
+        } else {
+          video.classList.add('hidden');
+        }
+      }
+    } else {
+      if(post.url.includes("gfycat")) {
+        console.log(post.secure_media.oembed.thumbnail_url)
+        image.src = post.secure_media.oembed.thumbnail_url
+      } else if (post.url.includes("redgif")) {
+        video.src = post.preview.reddit_video_preview.fallback_url;
+        video.classList.remove('hidden');
+      } else {
+      if(post.url.includes(".gifv")) {
+      video.src = post.url.replace('gifv', 'mp4');
+      video.classList.remove('hidden');
+    } else if (post.url.includes(".gif")) {
+      video.src = post.url.replace('gif', 'mp4');
+      video.classList.remove('hidden');
+    } else {
+      if(post.media.reddit_video != null) {
+        video.src = post.media.reddit_video.fallback_url;
+        video.classList.remove('hidden');
+      } else {
+        video.classList.add('hidden');
+      }
+    }
+  }
+}
   } catch {
       console.log('next');
-       downloadNextPost(url);
-      showPost(posts[posts.length-1]);
+      //  downloadNextPost(url);
+      // showPost(posts[posts.length-1]);
   }
   title.innerText = post['title'].trim();
+  // title.innerText = post['title'].trim();
   a.href = `https://www.reddit.com${posts[posts.length - 1]['permalink']}`;
 }
 
@@ -153,7 +210,6 @@ var previousTouch = 0;
  function touchStartHandler(e) {
 
   previousTouch = e.timeStamp
-  document.getElementById('swipe').classList.add('hidden');
 
   if (e.target.className === 'search') {
     search.focus();
@@ -311,7 +367,6 @@ function clickHandler(e) {
 
 function wheelScroll(e) {
   // console.log(e)
-  document.getElementById('swipe').classList.add('hidden');
   if (e.deltaY > 0) {
     window.removeEventListener('wheel', wheelScroll);
     setTimeout(function () {
@@ -334,9 +389,12 @@ window.addEventListener('wheel', wheelScroll);
 function scaleChange(e) {
   if (image.style.objectFit != 'contain') {
     image.style.objectFit = 'contain';
+    video.style.objectFit = 'contain';
   } else {
     image.style.objectFit = 'cover';
+    video.style.objectFit = 'cover';
   }
 }
 
 image.addEventListener('dblclick', scaleChange);
+video.addEventListener('dblclick', scaleChange);

@@ -75,7 +75,7 @@ function downloadNextPost(url) {
   nextPost.onload = function () {
     after = nextPost.response.data.after;
     var post = nextPost.response.data.children[0].data;
-    // console.log(post);
+    console.log(post);
     // console.log(post.preview.images[0]);
 
 
@@ -126,11 +126,15 @@ function downloadNextPost(url) {
       } else if (post.url.includes("redgif")) {
         video.src = post.preview.reddit_video_preview.fallback_url;
         video.classList.remove('hidden');
+      } else if (post.url.includes('redd') && post.url.includes('.gif')) {
+      	image.src = post.url;
+        // video.classList.remove('hidden');
+
       } else {
-      if(post.url.includes(".gifv")) {
+      if(post.url.includes(".gifv") && !post.url.includes('redd')) {
         video.src = post.url.replace('gifv', 'mp4');
         video.classList.remove('hidden');
-      } else if (post.url.includes(".gif")) {
+      } else if (post.url.includes(".gif") && !post.url.includes('redd')) {
         video.src = post.url.replace('gif', 'mp4');
         video.classList.remove('hidden');
       } else {
@@ -149,11 +153,13 @@ function downloadNextPost(url) {
       } else if (post.url.includes("redgif")) {
         video.src = post.preview.reddit_video_preview.fallback_url;
         video.classList.remove('hidden');
+      } else if (post.url.includes('redd') && post.url.includes('.gif')) {
+      	image.src = post.url;
       } else {
-      if(post.url.includes(".gifv")) {
+      if(post.url.includes(".gifv") && !post.url.includes('redd')) {
       video.src = post.url.replace('gifv', 'mp4');
       video.classList.remove('hidden');
-    } else if (post.url.includes(".gif")) {
+    } else if (post.url.includes(".gif") && !post.url.includes('redd')) {
       video.src = post.url.replace('gif', 'mp4');
       video.classList.remove('hidden');
     } else {

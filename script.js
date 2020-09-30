@@ -119,6 +119,14 @@ function downloadNextPost(url) {
     if(post.crosspost_parent != null) {
       console.log("post.crosspost_parent")
       post = post.crosspost_parent_list[0]
+
+      if(post.url.includes("gfycat")) {
+        console.log(post.secure_media.oembed.thumbnail_url)
+        image.src = post.secure_media.oembed.thumbnail_url
+      } else if (post.url.includes("redgif")) {
+        video.src = post.preview.reddit_video_preview.fallback_url;
+        video.classList.remove('hidden');
+      } else {
       if(post.url.includes(".gifv")) {
         video.src = post.url.replace('gifv', 'mp4');
         video.classList.remove('hidden');
@@ -132,7 +140,8 @@ function downloadNextPost(url) {
         } else {
           video.classList.add('hidden');
         }
-      }
+      	}
+  		}
     } else {
       if(post.url.includes("gfycat")) {
         console.log(post.secure_media.oembed.thumbnail_url)

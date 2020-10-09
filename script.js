@@ -11,6 +11,8 @@ var screenToggle = document.getElementById('screenToggle');
 
 var welcome = document.getElementById('welcome');
 
+// welcome.addEventListener('click', function(e){ alert('Hello') });
+
 var counter = 0;
 
 var basicSubreddits = `
@@ -79,6 +81,7 @@ function downloadNextPost(url) {
     // console.log(post.preview.images[0]);
 
 
+
     try {
     if (post.preview.images[0] != null || post.domain.includes('imgur') || post.url.includes('jpg')) {
       // if(!post.domain.includes('gfycat') && !post.url.includes('gfycat') && !post.url.includes('youtu')) {
@@ -97,7 +100,7 @@ function downloadNextPost(url) {
       console.log('next');
       downloadNextPost(url);
     }
-  } catch {
+  } catch (e) {
     console.log('next');
     downloadNextPost(url);
   }
@@ -172,7 +175,7 @@ function downloadNextPost(url) {
     }
   }
 }
-  } catch {
+  } catch (e) {
       console.log('next');
       //  downloadNextPost(url);
       // showPost(posts[posts.length-1]);

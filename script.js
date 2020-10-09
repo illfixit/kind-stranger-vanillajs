@@ -222,7 +222,62 @@ var y = [];
 var x = [];
 var previousTouch = 0;
 
- function touchStartHandler(e) {
+//  function touchStartHandlerX(e) {
+
+//   previousTouch = e.timeStamp
+
+//   if (e.target.className === 'search') {
+//     search.focus();
+//     if (results.innerHTML.trim() == '') {
+//       results.innerHTML = basicSubreddits;
+//     }
+//     results.classList.remove('hidden');
+//   }
+
+//   if (e.target.className === 'image') {
+//     // e.preventDefault();
+//     x.push(e.targetTouches[0].clientX);
+//     results.classList.add('hidden');
+//     // console.log(url);
+//     // if(counter = 0) {  downloadNextPost(url)};
+//   }
+
+//   if (e.target.className === 'result') {
+//     var sub = e.target.innerText;
+//     counter = 0;
+//     posts = [];
+//     after = '';
+//     search.value = '';
+//     results.classList.add('hidden');
+//     url = `https://www.reddit.com${sub.trim()}hot.json?`;
+//     results.innerHTML = '';
+//     downloadNextPost(url);
+//   }
+
+//   if (e.target.className === 'close') {
+//     document.location.reload();
+//   }
+// }
+
+// function touchMoveHandlerX(e) {
+//   x.push(e.targetTouches[0].clientX);
+  
+//   // image.style.transform = `translateX(${(x[x.length - 1] - x[0])/5}px)`;
+// }
+
+//  function touchEndHandlerX(e) {
+//   var delta = x[0] - x[x.length - 1];
+//   x = [];
+
+//   if (delta > 0) {
+//     getNextPost();
+//   } else if (delta < 0) {
+//     getPreviousPost();
+//   }
+// }
+
+
+function touchStartHandlerY(e) {
 
   previousTouch = e.timeStamp
 
@@ -236,7 +291,7 @@ var previousTouch = 0;
 
   if (e.target.className === 'image') {
     // e.preventDefault();
-    x.push(e.targetTouches[0].clientX);
+    y.push(e.targetTouches[0].clientY);
     results.classList.add('hidden');
     // console.log(url);
     // if(counter = 0) {  downloadNextPost(url)};
@@ -259,15 +314,15 @@ var previousTouch = 0;
   }
 }
 
-function touchMoveHandler(e) {
-  x.push(e.targetTouches[0].clientX);
+function touchMoveHandlerY(e) {
+  y.push(e.targetTouches[0].clientY);
   
   // image.style.transform = `translateX(${(x[x.length - 1] - x[0])/5}px)`;
 }
 
- function touchEndHandler(e) {
-  var delta = x[0] - x[x.length - 1];
-  x = [];
+ function touchEndHandlerY(e) {
+  var delta = y[0] - y[y.length - 1];
+  y = [];
 
   if (delta > 0) {
     getNextPost();
@@ -275,6 +330,9 @@ function touchMoveHandler(e) {
     getPreviousPost();
   }
 }
+
+
+
 
  function getNextPost() {
   // image.style.opacity = "1";
@@ -298,9 +356,13 @@ function getPreviousPost() {
   showPost(posts[posts.length - counter - 1]);
 }
 
-window.addEventListener('touchstart', touchStartHandler);
-window.addEventListener('touchmove', touchMoveHandler);
-window.addEventListener('touchend', touchEndHandler);
+// window.addEventListener('touchstart', touchStartHandlerX);
+// window.addEventListener('touchmove', touchMoveHandlerX);
+// window.addEventListener('touchend', touchEndHandlerX);
+
+window.addEventListener('touchstart', touchStartHandlerY);
+window.addEventListener('touchmove', touchMoveHandlerY);
+window.addEventListener('touchend', touchEndHandlerY);
 
 welcome.addEventListener('click', closeWelcomeScreen);
 

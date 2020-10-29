@@ -292,9 +292,10 @@ function touchStartHandlerY(e) {
     results.classList.remove('hidden');
   }
 
-  if (e.target.className === 'image') {
+  if (e.target.className === 'image' || e.target.className === 'video') {
     // e.preventDefault();
     y.push(e.targetTouches[0].clientY);
+    // x.push(e.targetTouches[0].clientX);
     results.classList.add('hidden');
     // console.log(url);
     // if(counter = 0) {  downloadNextPost(url)};
@@ -319,20 +320,24 @@ function touchStartHandlerY(e) {
 
 function touchMoveHandlerY(e) {
   y.push(e.targetTouches[0].clientY);
-  
-  // image.style.transform = `translateX(${(x[x.length - 1] - x[0])/5}px)`;
+
 }
 
  function touchEndHandlerY(e) {
-  var delta = y[0] - y[y.length - 1];
+  var deltaY = y[0] - y[y.length - 1];
+
+
   y = [];
 
-  if (delta > 0) {
+
+  if (deltaY > 0) {
     getNextPost();
-  } else if (delta < 0) {
+  } else if (deltaY < 0) {
     getPreviousPost();
   }
 }
+
+
 
 
 
@@ -365,6 +370,7 @@ function getPreviousPost() {
 
 window.addEventListener('touchstart', touchStartHandlerY);
 window.addEventListener('touchmove', touchMoveHandlerY);
+// window.addEventListener('touchmove', touchMoveHandlerX);
 window.addEventListener('touchend', touchEndHandlerY);
 
 welcome.addEventListener('click', closeWelcomeScreen);
@@ -488,22 +494,3 @@ video.addEventListener('mousemove', function(e){
   image.style.objectPosition = `${(((e.clientX/window.innerWidth))*100).toFixed(5)}%`
   video.style.objectPosition = `${(((e.clientX/window.innerWidth))*100).toFixed(5)}%`
 })
-
-
-let gyroscope = new Gyroscope({frequency: 60});
-
-gyroscope.addEventListener('reading', e => {
-  title.innerText = "MOTION!"
-  // alert(gyroscope.x);
-  // image.style.objectPosition = `${(((gyroscope.x/window.innerWidth))*100).toFixed(5)}%`
-});
-
-gyroscope.start();
-
-if (window.DeviceMotionEvent) {
-  setTimeout(function(){ title.innerText = "MOTION!" }, 3000);
-}
-
-alert("Hello!")
-
-window.addEventListener("devicemotion", function(){ title.innerText = "MOTION!" }, true);

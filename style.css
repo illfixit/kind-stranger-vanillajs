@@ -43,6 +43,7 @@ body {
   display: block;
   object-fit: cover;
   z-index: -100;
+  cursor: none;
 }
 
 video {
@@ -54,6 +55,7 @@ video {
   display: block;
   object-fit: cover;
   z-index: -50;
+  cursor: none;
 }
 
 .hidden {

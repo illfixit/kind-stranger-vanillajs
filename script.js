@@ -478,3 +478,32 @@ function scaleChange(e) {
 
 image.addEventListener('dblclick', scaleChange);
 video.addEventListener('dblclick', scaleChange);
+
+image.addEventListener('mousemove', function(e){ 
+  image.style.objectPosition = `${(((e.clientX/window.innerWidth))*100).toFixed(5)}%`
+  video.style.objectPosition = `${(((e.clientX/window.innerWidth))*100).toFixed(5)}%`
+})
+
+video.addEventListener('mousemove', function(e){ 
+  image.style.objectPosition = `${(((e.clientX/window.innerWidth))*100).toFixed(5)}%`
+  video.style.objectPosition = `${(((e.clientX/window.innerWidth))*100).toFixed(5)}%`
+})
+
+
+let gyroscope = new Gyroscope({frequency: 60});
+
+gyroscope.addEventListener('reading', e => {
+  title.innerText = "MOTION!"
+  // alert(gyroscope.x);
+  // image.style.objectPosition = `${(((gyroscope.x/window.innerWidth))*100).toFixed(5)}%`
+});
+
+gyroscope.start();
+
+if (window.DeviceMotionEvent) {
+  setTimeout(function(){ title.innerText = "MOTION!" }, 3000);
+}
+
+alert("Hello!")
+
+window.addEventListener("devicemotion", function(){ title.innerText = "MOTION!" }, true);

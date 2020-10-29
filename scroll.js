@@ -1,0 +1,2 @@
+document.querySelector('video').style = "width:100vw; height: 100vh; object-fit: cover; cursor: none;"; 
+document.addEventListener('mousemove', function(e){ document.querySelector('video').style.objectPosition = `${(((e.clientX/window.innerWidth))*100).toFixed(5)}%`})

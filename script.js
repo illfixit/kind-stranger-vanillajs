@@ -19,7 +19,7 @@ var basicSubreddits = `
 <div class="result">
 <img src="https://styles.redditmedia.com/t5_2r1tc/styles/communityIcon_p1gzakhq6y201.png" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">/r/itookapicture/</div>
 <div class="result">
-<img src="https://styles.redditmedia.com/t5_2qh1o/styles/communityIcon_vzx333xor7101.png" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">/r/aww/</div>
+<img src="https://styles.redditmedia.com/t5_2qh1o/styles/communityIcon_6fzlk8ukx6s51.jpg" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">/r/aww/</div>
 <div class="result">
 <img src="https://b.thumbs.redditmedia.com/VoZlOfOxgNGkqayUrmGI96XuSOGKVT-MVI4WK-CXP3o.png" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">/r/art/</div>
 <div class="result">
@@ -36,29 +36,38 @@ function reload() {
   document.location.reload();
 }
 
-function closeWelcomeScreen() {
-  welcome.style.display = 'none';
-  search.classList.remove('hidden');
-  image.classList.remove('blurred');
-  description.classList.remove('hidden');
-  close.classList.remove('hidden');
-  // document.getElementById('swipe').classList.remove('hidden');
-}
-
-
-
 close.addEventListener('click', reload);
 
 image.classList.remove('hidden');
 
 var startUrl = `https://www.reddit.com/r/itookapicture/hot.json?`;
 var after = '';
+var after10 = '';
 var posts = [];
+var preloadURLs = [];
+var preloading;
+
 
 (function () {
   url = startUrl;
   downloadNextPost(startUrl);
 })();
+
+
+function closeWelcomeScreen() {
+  welcome.style.display = 'none';
+  search.classList.remove('hidden');
+  image.classList.remove('blurred');
+  description.classList.remove('hidden');
+  close.classList.remove('hidden');
+  
+  download50Posts(startUrl);
+  // document.getElementById('swipe').classList.remove('hidden');
+}
+
+
+
+
 
 function downloadNextPost(url) {
   var nextPost = new XMLHttpRequest();
@@ -77,7 +86,7 @@ function downloadNextPost(url) {
   nextPost.onload = function () {
     after = nextPost.response.data.after;
     var post = nextPost.response.data.children[0].data;
-    console.log(post);
+    // console.log(post);
     // console.log(post.preview.images[0]);
 
 
@@ -105,6 +114,52 @@ function downloadNextPost(url) {
     downloadNextPost(url);
   }
   };
+}
+
+function download50Posts(url50) {
+  var next50Posts = new XMLHttpRequest();
+  next50Posts.open('GET', `${url50}&limit=50`);
+
+  next50Posts.responseType = 'json';
+  next50Posts.send();
+
+  next50Posts.onerror = function (e) {
+    // console.log(e);
+  };
+
+  next50Posts.onload = function () {
+    console.log('50!', url50);
+    var fiftyPosts = next50Posts.response.data;
+    preloadURLs = [];
+    try { fiftyPosts.children.forEach(function(p){ 
+      preloadURLs.push(p.data.preview.images[0].resolutions[p.data.preview.images[0].resolutions.length-1].url.replace(
+      /amp;/gi,
+      ''
+    )) }); } catch {
+
+    }
+    // console.log(preloadURLs);
+    // preloadImages(preloadURLs);
+
+    var cachedImg = new Image ();
+    var index = 0;
+    cachedImg.src = preloadURLs[index];
+    index++;
+    preloading = setInterval(
+      function(){
+        cachedImg.src = preloadURLs[index]; 
+        index++;
+      }, 500
+    );
+    
+    setTimeout(function(){ clearInterval(preloading); }, 25000)
+
+
+  }
+}
+
+function preloadImages(arr) {
+
 }
 
 
@@ -182,7 +237,7 @@ function downloadNextPost(url) {
   }
   title.innerText = post['title'].trim();
   // title.innerText = post['title'].trim();
-  a.href = `https://www.reddit.com${posts[posts.length - 1]['permalink']}`;
+  a.href = `https://www.reddit.com${post['permalink']}`;
 }
 
 
@@ -311,6 +366,8 @@ function touchStartHandlerY(e) {
     url = `https://www.reddit.com${sub.trim()}hot.json?`;
     results.innerHTML = '';
     downloadNextPost(url);
+    clearInterval(preloading);
+    download50Posts(url);
   }
 
   if (e.target.className === 'close') {
@@ -399,6 +456,8 @@ function keyboardButtonsHandler(e) {
       url = `https://www.reddit.com/r/${search.value.trim()}/hot.json?`;
       search.value = '';
        downloadNextPost(url);
+       clearInterval(preloading);
+       download50Posts(url);
     } 
   } else if (e.which == 39 || e.keyCode == 39 || e.key === 'ArrowDown' || e.which == 40 || e.keyCode == 40 || e.key === 'ArrowRight') {
     if(counter > 0){
@@ -448,6 +507,8 @@ function clickHandler(e) {
     url = `https://www.reddit.com${sub.trim()}hot.json?`;
     results.innerHTML = '';
     downloadNextPost(url);
+    clearInterval(preloading);
+    download50Posts(url);
   }
 }
 
@@ -485,12 +546,12 @@ function scaleChange(e) {
 image.addEventListener('dblclick', scaleChange);
 video.addEventListener('dblclick', scaleChange);
 
-image.addEventListener('mousemove', function(e){ 
-  image.style.objectPosition = `${(((e.clientX/window.innerWidth))*100).toFixed(5)}%`
-  video.style.objectPosition = `${(((e.clientX/window.innerWidth))*100).toFixed(5)}%`
-})
+// image.addEventListener('mousemove', function(e){ 
+//   image.style.objectPosition = `${(((e.clientX/window.innerWidth))*100).toFixed(5)}%`
+//   video.style.objectPosition = `${(((e.clientX/window.innerWidth))*100).toFixed(5)}%`
+// })
 
-video.addEventListener('mousemove', function(e){ 
-  image.style.objectPosition = `${(((e.clientX/window.innerWidth))*100).toFixed(5)}%`
-  video.style.objectPosition = `${(((e.clientX/window.innerWidth))*100).toFixed(5)}%`
-})
+// video.addEventListener('mousemove', function(e){ 
+//   image.style.objectPosition = `${(((e.clientX/window.innerWidth))*100).toFixed(5)}%`
+//   video.style.objectPosition = `${(((e.clientX/window.innerWidth))*100).toFixed(5)}%`
+// })

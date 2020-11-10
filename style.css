@@ -44,6 +44,7 @@ body {
   object-fit: cover;
   z-index: -100;
   cursor: none;
+  /* filter: brightness(0.5) ; */
 }
 
 video {

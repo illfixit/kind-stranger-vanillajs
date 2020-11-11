@@ -263,12 +263,12 @@ function searchSubreddits(s) {
         : element.data.icon_img ||
           `https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png`;
 
-      // console.log(element.data.url, imageSource);
+      // console.log(element.data);
       element.data.url == null
         ? null
         : (results.innerHTML += `<div class="result">
         <img src="${imageSource}" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
-        ${element.data.url}</div>`);
+        ${element.data.url} - ${new Intl.NumberFormat().format(element.data.subscribers)} subscribers</div>`);
     });
   };
 }
@@ -354,7 +354,7 @@ function touchStartHandlerY(e) {
   }
 
   if (e.target.className === 'result') {
-    var sub = e.target.innerText;
+    var sub = e.target.innerText.split('-')[0];
     counter = 0;
     posts = [];
     after = '';
@@ -495,7 +495,7 @@ function clickHandler(e) {
   }
 
   if (e.target.className === 'result') {
-    var sub = e.target.innerText;
+    var sub = e.target.innerText.split('-')[0];
     counter = 0;
     posts = [];
     after = '';

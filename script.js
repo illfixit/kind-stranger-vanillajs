@@ -128,43 +128,40 @@ function download50Posts(url50) {
   };
 
   next50Posts.onload = function () {
-    console.log('50!', url50);
-    var fiftyPosts = next50Posts.response.data;
-    preloadURLs = [];
-    try { fiftyPosts.children.forEach(function(p){ 
-      preloadURLs.push(p.data.preview.images[0].resolutions[p.data.preview.images[0].resolutions.length-1].url.replace(
-      /amp;/gi,
-      ''
-    )) }); } catch {
+    // console.log('50!', url50);
+    var fiftyPosts = next50Posts.response.data.children;
+    // console.log(next50Posts)
+    var fiftyURLS = [];
+    fiftyPosts.forEach((p)=>{
+      try{
+        fiftyURLS.push(p.data.preview.images[0].resolutions[p.data.preview.images[0].resolutions.length-1].url.replace(/amp;/gi, ''))
+      } catch(e) {
+        console.log('skip');
+      }
+    })
+    // var fiftyURLS = fiftyPosts.map((p)=>{ 
+    //   return typeof p.data.preview.images[0].resolutions[p.data.preview.images[0].resolutions.length-1].url != 'undefined' ? p.data.preview.images[0].resolutions[p.data.preview.images[0].resolutions.length-1].url.replace(
+    //   /amp;/gi, '' ) : null; 
+    // })
+    // console.log(fiftyURLS)
 
+    function preload() {
+      var index = 0;
+      preloading = setInterval(
+        function(){
+
+          var cachedImg = new Image();
+          cachedImg.src = fiftyURLS[index]; 
+          index++;
+        }, 500
+      );
     }
-    // console.log(preloadURLs);
-    // preloadImages(preloadURLs);
-
-    var cachedImg = new Image ();
-    var index = 0;
-    cachedImg.src = preloadURLs[index];
-    index++;
-    preloading = setInterval(
-      function(){
-        cachedImg.src = preloadURLs[index]; 
-        index++;
-      }, 500
-    );
-    
+    preload()
     setTimeout(function(){ clearInterval(preloading); }, 25000)
 
 
   }
 }
-
-function preloadImages(arr) {
-
-}
-
-
-
-
 
  function showPost(post) {
   try {
@@ -175,11 +172,11 @@ function preloadImages(arr) {
     video.classList.add('hidden');
 
     if(post.crosspost_parent != null) {
-      console.log("post.crosspost_parent")
+      // console.log("post.crosspost_parent")
       post = post.crosspost_parent_list[0]
 
       if(post.url.includes("gfycat")) {
-        console.log(post.secure_media.oembed.thumbnail_url)
+        // console.log(post.secure_media.oembed.thumbnail_url)
         image.src = post.secure_media.oembed.thumbnail_url
       } else if (post.url.includes("redgif")) {
         video.src = post.preview.reddit_video_preview.fallback_url;
@@ -206,7 +203,7 @@ function preloadImages(arr) {
   		}
     } else {
       if(post.url.includes("gfycat")) {
-        console.log(post.secure_media.oembed.thumbnail_url)
+        // console.log(post.secure_media.oembed.thumbnail_url)
         image.src = post.secure_media.oembed.thumbnail_url
       } else if (post.url.includes("redgif")) {
         video.src = post.preview.reddit_video_preview.fallback_url;
@@ -252,7 +249,7 @@ function searchSubreddits(s) {
   listOfSubreddits.send();
 
   listOfSubreddits.onerror = function (e) {
-    console.log(e);
+    // console.log(e);
   };
 
   listOfSubreddits.onload = function () {

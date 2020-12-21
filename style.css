@@ -10,15 +10,14 @@ body {
   -webkit-overflow-scrolling: none;
   background-color: #111;
   color: #fff;
-  font-family: 'Lato', sans-serif;  min-height: 100vh;
-  min-width: 100vw;
+  font-family: 'Lato', sans-serif;
+  min-height: 101vh;
+  min-width: 101vw;
   overflow: hidden;
   position: fixed;
   top: -10px;
   left: -10px;
-
   display: flex;
-
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -43,7 +42,7 @@ body {
   display: block;
   object-fit: cover;
   z-index: -100;
-  cursor: none;
+  /* cursor: none; */
   /* filter: brightness(0.5) ; */
 }
 
@@ -56,7 +55,7 @@ video {
   display: block;
   object-fit: cover;
   z-index: -50;
-  cursor: none;
+  /* cursor: none; */
 }
 
 .hidden {
@@ -64,20 +63,27 @@ video {
 }
 
 input {
+  outline: none;
+}
+
+.search {
   border: none;
   border-radius: 0%;
   color: white;
   background-color: rgba(0, 0, 0, 0.35);
   outline: none;
   position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 0;
   left: 0;
   text-align: left;
   font-size: 1.2rem;
   font-weight: bold;
-  height: 3.5rem;
+  height: 3rem;
   width: 100vw;
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   padding-left: 1rem;
   z-index: 100;
 }
@@ -90,9 +96,10 @@ input {
 }
 
 .results {
-  width: 100vw;
+  /* width: 100vw; */
+  width: 101vw;
   position: fixed;
-  top: 3.5rem;
+  top: 3rem;
   height: auto;
   background-color: rgba(0, 0, 0, 0.3);
   color: #fff;
@@ -116,7 +123,6 @@ input {
   /* right: 0; */
   width: 100vw;
   height: auto;
-
   font-size: 1.2rem;
   /* background-color: rgba(255, 255, 255, 0.3); */
   background-color: rgba(0, 0, 0, 0.35);
@@ -133,19 +139,187 @@ a {
   text-decoration: none;
 }
 
-.close {
+.menubtn {
   position: fixed;
   background: transparent;
-  color: #ccc;
-  border: none;
-  z-index: 120;
-  /* cursor: pointer; */
+  z-index: 170;
+  cursor: pointer;
   outline: none;
   top: 0;
   right: 0;
-  font-weight: bold;
   height: 3rem;
   width: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.menuimg {
+  /* border: 1px solid black; */
+  /* border-radius: 50%; */
+  background-color: rgba(255, 255, 255, 0);
+  color: rgba(255, 255, 255, 0);
+  z-index: 170;
+  height: 100%;
+  width: auto;
+  filter: invert();
+  transform: scale(0.35);
+  display: flex;
+  outline: none;
+}
+
+.menu-close {
+  display: block;
+  position: absolute;
+  /* background-color: rgba(255, 245, 238, 0.082); */
+  z-index: 150;
+  top: 0;
+  bottom: 0;
+  left: -20vw;
+  width: 20vw;
+  height: 100vh;
+  cursor: pointer;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start; */
+  /* align-items: center; */
+  position: absolute;
+  padding-top: 10vh;
+  z-index: 150;
+  top: 0;
+  bottom: 0;
+  right: -80vw;
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: translateY(0vw);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+  width: 80vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.toggle-button-containers {
+  position: relative;
+  margin-left: 3rem;
+  width: 80vw;
+  height: 3rem;
+}
+
+.toggle-button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 80vw;
+  height: 3rem;
+}
+
+.toggle-button-text {
+  margin-left: 1rem;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.toggle-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  opacity: 0.9;
+
+  position: relative;
+  /* display: inline-block; */
+
+  margin: 1rem;
+
+  width: 4.5rem;
+  height: 2.5rem;
+
+  vertical-align: top;
+  background: #ffffff;
+
+  border-radius: 30px;
+
+  cursor: pointer;
+}
+
+.toggle-button::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  left: 0.25rem;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  width: 2rem;
+  height: 2rem;
+  background-color: rgb(51, 72, 194);
+  border-radius: 50%;
+
+  transform: translateX(0);
+}
+
+.toggle-button:checked::after {
+  transform: translateX(calc(100%));
+  background-color: #fff;
+}
+.toggle-button:checked {
+  background-color: rgb(51, 72, 194);
+}
+
+.slider-text {
+  margin-left: 1rem;
+  font-size: 1.2rem;
+}
+
+/* The slider itself */
+.slider {
+  position: relative;
+  margin-top: 1rem;
+  -webkit-appearance: none; /* Override default CSS styles */
+  appearance: none;
+  border-radius: 1rem;
+  width: 90%; /* Full-width */
+  margin-left: auto;
+  margin-right: auto;
+  height: 1.3rem; /* Specified height */
+  background: rgb(255, 255, 255); /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.9; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+  transition: opacity 0.2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  display: block;
+  border-radius: 50%;
+  width: 1.2rem; /* Set a specific slider handle width */
+  height: 1.2rem; /* Slider handle height */
+  background: rgb(51, 72, 194); /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  border-radius: 50%;
+  width: 1.5rem; /* Set a specific slider handle width */
+  height: 1.5rem; /* Slider handle height */
+  background: rgb(51, 72, 194); /* Green background */
+  cursor: pointer; /* Cursor on hover */
 }
 
 .swipe {

@@ -233,6 +233,11 @@ a {
   -moz-appearance: none;
   appearance: none;
 
+  display: flex;
+  flex-direction: row;
+  justify-content: space-center;
+  align-items: center;
+
   opacity: 0.9;
 
   position: relative;
@@ -253,11 +258,7 @@ a {
 
 .toggle-button::after {
   content: '';
-  display: inline-block;
-  position: absolute;
-  left: 0.33vw;
-  top: 0.33vw;
-  /* bottom: 0.5vw; */
+  margin-left: 0.4vw;
   width: 7vw;
   height: 7vw;
   background-color: rgb(51, 72, 194);

@@ -81,7 +81,7 @@ function toggleSlideShow() {
   if (slideshowToggle.checked) {
     // console.log('start slide show');
     try {
-      if (slideshow === null) {
+      if (slideshow !== null) {
         clearInterval(slideshow);
       }
     } catch (e) {}
@@ -544,7 +544,11 @@ function keyboardButtonsHandler(e) {
       url = `https://www.reddit.com/r/${search.value.trim()}/hot.json?`;
       search.value = '';
       // debugger;
-      clearInterval(slideshow);
+      try {
+        if (slideshow !== null) {
+          clearInterval(slideshow);
+        }
+      } catch (e) {}
       slideshowToggle.checked = false;
       downloadNextPost(url);
       downloadNextPosts(url);
@@ -612,7 +616,11 @@ function clickHandler(e) {
     results.innerHTML = '';
     // debugger;
     slideshowToggle.checked = false;
-    clearInterval(slideshow);
+    try {
+      if (slideshow !== null) {
+        clearInterval(slideshow);
+      }
+    } catch (e) {}
     downloadNextPost(url);
     downloadNextPosts(url);
     postNum = 0;

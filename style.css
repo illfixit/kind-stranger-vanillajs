@@ -240,8 +240,8 @@ a {
 
   margin: 1rem;
 
-  width: 4.5rem;
-  height: 2.5rem;
+  width: 15vw;
+  height: 8vw;
 
   vertical-align: top;
   background: #ffffff;
@@ -255,11 +255,11 @@ a {
   content: '';
   display: inline-block;
   position: absolute;
-  left: 0.25rem;
-  top: 0.25rem;
-  bottom: 0.25rem;
-  width: 2rem;
-  height: 2rem;
+  left: 0.33vw;
+  top: 0.33vw;
+  /* bottom: 0.5vw; */
+  width: 7vw;
+  height: 7vw;
   background-color: rgb(51, 72, 194);
   border-radius: 50%;
 

@@ -14,6 +14,7 @@ var menubtn = document.getElementById('menubtn');
 var menu = document.getElementById('menu');
 var menuClose = document.getElementById('menu-close');
 var screenToggle = document.getElementById('screenToggle');
+var slideshowToggle = document.getElementById('slideshow-toggle-button');
 
 var welcome = document.getElementById('welcome');
 
@@ -76,8 +77,27 @@ function toggleNightMode() {
   }
 }
 
+function toggleSlideShow() {
+  if (slideshowToggle.checked) {
+    // console.log('start slide show');
+    try {
+      if (slideshow === null) {
+        clearInterval(slideshow);
+      }
+    } catch (e) {}
+    slideshow = setInterval(function () {
+      downloadNextPost(url);
+    }, 5000);
+  } else {
+    // console.log('stop slide show');
+    clearInterval(slideshow);
+  }
+}
+
+slideshowToggle.addEventListener('click', toggleSlideShow);
+
 range.oninput = function () {
-  console.log(`brightness(${range.value / 100})`);
+  // console.log(`brightness(${range.value / 100})`);
   image.style.filter = `brightness(${range.value / 100})`;
   video.style.filter = `brightness(${range.value / 100})`;
   search.style.opacity = range.value / 100;
@@ -96,8 +116,8 @@ var posts = [];
 var preloadURLs = [];
 var preloading;
 
+url = startUrl;
 (function () {
-  url = startUrl;
   downloadNextPost(startUrl);
 })();
 
@@ -165,7 +185,7 @@ var nextURLS = [];
 var index = 0;
 
 function downloadNextPosts(url) {
-  console.log(url);
+  // console.log(url);
   nextURLS = [];
   var nextPosts = new XMLHttpRequest();
   nextPosts.open(
@@ -205,11 +225,11 @@ function downloadNextPosts(url) {
 
       index = 0;
       function preload() {
-        console.log('preloading!');
+        // console.log('preloading!');
         var cachedImg = new Image();
 
         try {
-          console.log('try', index);
+          // console.log('try', index);
           cachedImg.src = nextURLS[index];
           index++;
         } catch (e) {
@@ -303,7 +323,7 @@ function showPost(post) {
 
   setTimeout(function () {
     title.innerText = post['title'].trim();
-  }, 10);
+  }, 20);
   a.href = `https://www.reddit.com${post['permalink']}`;
 }
 
@@ -432,8 +452,9 @@ function touchStartHandlerY(e) {
     results.classList.add('hidden');
     url = `https://www.reddit.com${sub.trim()}hot.json?`;
     results.innerHTML = '';
+    clearInterval(slideshow);
     downloadNextPost(url);
-
+    slideshowToggle.checked = false;
     downloadNextPosts(url);
     postNum = 0;
   }
@@ -522,8 +543,10 @@ function keyboardButtonsHandler(e) {
       results.classList.add('hidden');
       url = `https://www.reddit.com/r/${search.value.trim()}/hot.json?`;
       search.value = '';
+      // debugger;
+      clearInterval(slideshow);
+      slideshowToggle.checked = false;
       downloadNextPost(url);
-      console.log('enter', url);
       downloadNextPosts(url);
       postNum = 0;
     }
@@ -539,7 +562,7 @@ function keyboardButtonsHandler(e) {
       counter--;
       showPost(posts[posts.length - counter - 1]);
     } else {
-      downloadNextPost(url);
+      toggleSlideShow();
     }
   } else if (
     e.which == 37 ||
@@ -587,6 +610,9 @@ function clickHandler(e) {
     results.classList.add('hidden');
     url = `https://www.reddit.com${sub.trim()}hot.json?`;
     results.innerHTML = '';
+    // debugger;
+    slideshowToggle.checked = false;
+    clearInterval(slideshow);
     downloadNextPost(url);
     downloadNextPosts(url);
     postNum = 0;

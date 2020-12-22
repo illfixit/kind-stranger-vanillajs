@@ -322,6 +322,7 @@ a {
   cursor: pointer; /* Cursor on hover */
 }
 
+/* 
 .swipe {
   object-fit: contain;
   position: fixed;
@@ -329,7 +330,7 @@ a {
   max-height: auto;
   max-width: 10vw;
   filter: invert(1);
-}
+} */
 
 .welcome {
   border-radius: 20px;

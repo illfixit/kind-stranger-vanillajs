@@ -58,6 +58,11 @@ video {
   /* cursor: none; */
 }
 
+video[poster] {
+  backdrop-filter: brightness(0);
+  -webkit-backdrop-filter: brightness(0);
+}
+
 .hidden {
   display: none !important;
 }

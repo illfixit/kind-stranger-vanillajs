@@ -351,5 +351,5 @@ a {
 }
 
 .blurred {
-  filter: blur(15px);
+  filter: blur(5px);
 }

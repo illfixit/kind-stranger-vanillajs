@@ -138,6 +138,9 @@ function closeWelcomeScreen() {
 }
 
 function downloadNextPost(url, after = subsInfo[subsInfo.length - 1][1]) {
+  // title.innerText = new Array(title.innerText.length + 1).join('\u2060');
+  // title.innerText = '----->';
+
   fetch(`${url}&limit=1&after=${after}`)
     .then((response) => response.json())
     .then((data) => {
@@ -656,7 +659,16 @@ window.addEventListener('keydown', keyboardButtonsHandler);
 async function keyboardButtonsHandler(e) {
   if (e.which == 13 || e.keyCode == 13 || e.key === 'Enter') {
     if (search.value.trim()) {
-      // console.log(search.value);
+      let res = search.value.trim();
+      console.log(res);
+      if (res[0] === '/' && res[1] === 'r' && res[2] === '/') {
+        res = res.slice(2);
+      } else if (res[0] === 'r' && res[1] === '/') {
+        res = res.slice(1);
+      } else if (res[0] === '/') {
+        res = res.slice(0);
+      }
+
       clearInterval(preloading);
 
       results.classList.add('hidden');
@@ -668,12 +680,13 @@ async function keyboardButtonsHandler(e) {
       } catch (e) {}
       slideshowToggle.checked = false;
 
-      var sub = search.value.trim().replace(/[^a-z\d\s]+/gi, '');
+      var sub = res.replace(/[^a-z\d\s\+]+/gi, '');
       let subredditExists = await checkIfSubredditExists(sub);
 
       if (subredditExists) {
         search.value = '';
         // image.src = './icon.png';
+
         title.innerText = `loading r/${sub}/`;
         counter = 0;
         posts = [];

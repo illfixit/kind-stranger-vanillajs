@@ -551,7 +551,7 @@ async function touchStartHandlerY(e) {
     var sub = e.target.innerText
       .split('-')[0]
       .trim()
-      .replace(/[^a-z\d\s]+/gi, '')
+      .replace(/[^a-z\d\_\s]+/gi, '')
       .substring(1);
 
     results.classList.add('hidden');
@@ -680,7 +680,7 @@ async function keyboardButtonsHandler(e) {
       } catch (e) {}
       slideshowToggle.checked = false;
 
-      var sub = res.replace(/[^a-z\d\s\+]+/gi, '');
+      var sub = res.replace(/[^a-z\d\_\s\+]+/gi, '');
       let subredditExists = await checkIfSubredditExists(sub);
 
       if (subredditExists) {
@@ -753,7 +753,7 @@ async function clickHandler(e) {
     var sub = e.target.innerText
       .split('-')[0]
       .trim()
-      .replace(/[^a-z\d\s]+/gi, '')
+      .replace(/[^a-z\d\_\s]+/gi, '')
       .substring(1);
 
     results.classList.add('hidden');

@@ -1,5 +1,5 @@
 # Kind Stranger
-Kind Stranger | Minimalistic Mobile Reddit Viewer
+Minimalistic Mobile Reddit Viewer written in pure JavaScript
 
 ## Reviews
 

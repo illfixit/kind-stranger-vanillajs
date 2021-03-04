@@ -32,8 +32,8 @@ Kudos to her. (Good Job btw I love it)"
 ```
 
 ## Getting Started
-No Setup is required. You can copy these files on your Desktop or
-visit https://illfixit.github.io/kind-stranger to start using it.
+No Setup is required. You can copy these files on your Desktop 
+or visit https://illfixit.github.io/kind-stranger to start using it.
 
 ### Prerequisites
 Same. No Prerequisites. No NodeJS. No WebPack or Babel. Nothing.

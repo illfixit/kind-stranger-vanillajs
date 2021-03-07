@@ -171,10 +171,10 @@ a {
   z-index: 170;
   height: 100%;
   width: auto;
-  filter: invert();
   transform: scale(0.35);
   display: flex;
   outline: none;
+  /* animation: loading 2s infinite linear alternate; */
 }
 
 .menu-close {
@@ -352,4 +352,19 @@ a {
 
 .blurred {
   filter: blur(5px);
+}
+
+.loading {
+  animation: loading 12s ease-in infinite;
+  animation-delay: 450ms;
+}
+
+@keyframes loading {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0.8;
+  }
 }

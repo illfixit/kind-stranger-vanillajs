@@ -355,7 +355,7 @@ a {
 }
 
 .loading {
-  animation: loading 12s ease-in infinite;
+  animation: loading 12s ease-in infinite alternate;
   animation-delay: 450ms;
 }
 

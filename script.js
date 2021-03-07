@@ -132,7 +132,9 @@ function closeWelcomeScreen() {
   description.classList.remove('hidden');
   menubtn.classList.remove('hidden');
 
-  downloadNextPosts(startUrl);
+  setTimeout(() => {
+    downloadNextPosts(startUrl);
+  }, 1000);
 }
 
 function downloadNextPost(url, after = subsInfo[subsInfo.length - 1][1]) {
@@ -161,6 +163,7 @@ function downloadNextPost(url, after = subsInfo[subsInfo.length - 1][1]) {
           if (posts.length > 1) {
             console.log(posts.length);
             image.classList.add('loading');
+            video.classList.add('loading');
           }
           showPost(post);
         } else {
@@ -263,6 +266,7 @@ function showPost(post) {
     video.classList.add('hidden');
 
     image.onload = function () {
+      video.classList.remove('loading');
       image.classList.remove('loading');
       title.innerText = post['title'].trim();
       a.href = `https://www.reddit.com${post['permalink']}`;

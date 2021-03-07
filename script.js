@@ -1,32 +1,32 @@
-var search = document.getElementById('search');
-var image = document.getElementById('image');
-var video = document.getElementById('video');
-var description = document.getElementById('description');
-var results = document.getElementById('results');
-var title = document.getElementById('title');
+const search = document.getElementById('search');
+const image = document.getElementById('image');
+const video = document.getElementById('video');
+const description = document.getElementById('description');
+const results = document.getElementById('results');
+const title = document.getElementById('title');
 
-var toggleButton = document.getElementById('toggle-button');
-var sliderText = document.getElementById('slider-text');
-var range = document.getElementById('range');
+const toggleButton = document.getElementById('toggle-button');
+const sliderText = document.getElementById('slider-text');
+const range = document.getElementById('range');
 
-var menuImg = document.getElementById('menuImg');
-var menubtn = document.getElementById('menubtn');
-var menu = document.getElementById('menu');
-var menuClose = document.getElementById('menu-close');
+const menuImg = document.getElementById('menuImg');
+const menubtn = document.getElementById('menubtn');
+const menu = document.getElementById('menu');
+const menuClose = document.getElementById('menu-close');
 
-var screenToggle = document.getElementById('screenToggle');
-var slideshowToggle = document.getElementById('slideshow-toggle-button');
+const screenToggle = document.getElementById('screenToggle');
+const slideshowToggle = document.getElementById('slideshow-toggle-button');
 slideshowToggle.checked = false;
 
-var welcome = document.getElementById('welcome');
+const welcome = document.getElementById('welcome');
 
-var subsInfo = [['itookapicture', '']];
-var counter = 0;
-var errorCounter = 0;
+let subsInfo = [['itookapicture', '']];
+let counter = 0;
+let errorCounter = 0;
 
 let reset = false;
 
-var basicSubreddits = `
+const basicSubreddits = `
 <div class="result">
 <img src="https://styles.redditmedia.com/t5_2r1tc/styles/communityIcon_p1gzakhq6y201.png" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">/r/itookapicture/</div>
 <div class="result">
@@ -115,14 +115,12 @@ toggleButton.addEventListener('click', toggleNightMode);
 
 image.classList.remove('hidden');
 
-var startUrl = `https://www.reddit.com/r/itookapicture/hot.json?`;
-// var after = '';
-// var after10 = '';
-var posts = [];
-var preloadURLs = [];
-var preloading;
+const startUrl = `https://www.reddit.com/r/itookapicture/hot.json?`;
+let posts = [];
+let preloadURLs = [];
+let preloading;
 
-url = startUrl;
+let url = startUrl;
 (function () {
   downloadNextPost(startUrl);
 })();
@@ -149,7 +147,7 @@ function downloadNextPost(url, after = subsInfo[subsInfo.length - 1][1]) {
       subsInfo[subsInfo.length - 1][1] = after;
       // console.log(subsInfo);
 
-      var post = data.children[0].data;
+      let post = data.children[0].data;
 
       if (
         post.preview.images[0] != null ||
@@ -159,6 +157,11 @@ function downloadNextPost(url, after = subsInfo[subsInfo.length - 1][1]) {
         if (!post.url.includes('youtu')) {
           posts.push(post);
           // showPost(post);
+
+          if (posts.length > 1) {
+            console.log(posts.length);
+            image.classList.add('loading');
+          }
           showPost(post);
         } else {
           // console.log('next');
@@ -184,15 +187,15 @@ function downloadNextPost(url, after = subsInfo[subsInfo.length - 1][1]) {
     });
 }
 
-var afterDownloadNextPosts = '';
-var limit = 35;
-var nextURLS = [];
-var index = 0;
+let afterDownloadNextPosts = '';
+const limit = 35;
+let nextURLS = [];
+let index = 0;
 
 function downloadNextPosts(url) {
   // // console.log(url);
   nextURLS = [];
-  var nextPosts = new XMLHttpRequest();
+  let nextPosts = new XMLHttpRequest();
   nextPosts.open(
     'GET',
     `${url}&limit=${limit}&after=${afterDownloadNextPosts}`
@@ -208,7 +211,7 @@ function downloadNextPosts(url) {
       data.currentTarget.readyState === 4 &&
       data.currentTarget.status === 200
     ) {
-      var nextPostsData = nextPosts.response.data.children;
+      let nextPostsData = nextPosts.response.data.children;
       // // console.log(nextPostsData.response);
       afterDownloadNextPosts = nextPosts.response.data.after;
       nextPostsData.forEach((p) => {
@@ -225,7 +228,7 @@ function downloadNextPosts(url) {
       index = 0;
       function preload() {
         // // console.log('preloading!');
-        var cachedImg = new Image();
+        let cachedImg = new Image();
         try {
           // // console.log('try', index);
           cachedImg.src = nextURLS[index];
@@ -260,6 +263,7 @@ function showPost(post) {
     video.classList.add('hidden');
 
     image.onload = function () {
+      image.classList.remove('loading');
       title.innerText = post['title'].trim();
       a.href = `https://www.reddit.com${post['permalink']}`;
     };
@@ -431,7 +435,7 @@ async function checkIfSubredditExists(subreddit) {
 }
 
 function searchSubreddits(s) {
-  var listOfSubreddits = new XMLHttpRequest();
+  let listOfSubreddits = new XMLHttpRequest();
   listOfSubreddits.open(
     'GET',
     `https://www.reddit.com/api/subreddit_autocomplete_v2.json?query=${s}&raw_json=1&gilding_detail=1`
@@ -447,10 +451,10 @@ function searchSubreddits(s) {
   listOfSubreddits.onload = function () {
     results.innerHTML = '';
 
-    var list = listOfSubreddits.response.data.children;
+    let list = listOfSubreddits.response.data.children;
 
     list.forEach(function (element) {
-      var imageSource = element.data.community_icon
+      let imageSource = element.data.community_icon
         ? element.data.community_icon
         : element.data.icon_img ||
           `https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png`;
@@ -467,9 +471,9 @@ function searchSubreddits(s) {
   };
 }
 
-var y = [];
-// var x = [];
-var previousTouch = 0;
+let y = [];
+// let x = [];
+let previousTouch = 0;
 
 //  function touchStartHandlerX(e) {
 
@@ -492,7 +496,7 @@ var previousTouch = 0;
 //   }
 
 //   if (e.target.className === 'result') {
-//     var sub = e.target.innerText;
+//     let sub = e.target.innerText;
 //     counter = 0;
 //     posts = [];
 //     after = '';
@@ -515,7 +519,7 @@ var previousTouch = 0;
 // }
 
 //  function touchEndHandlerX(e) {
-//   var delta = x[0] - x[x.length - 1];
+//   let delta = x[0] - x[x.length - 1];
 //   x = [];
 
 //   if (delta > 0) {
@@ -527,6 +531,10 @@ var previousTouch = 0;
 
 async function touchStartHandlerY(e) {
   previousTouch = e.timeStamp;
+
+  if (e.target.className.includes('slider')) {
+    return;
+  }
 
   if (e.target.className === 'search') {
     search.focus();
@@ -541,14 +549,14 @@ async function touchStartHandlerY(e) {
     y.push(e.targetTouches[0].clientY);
     // x.push(e.targetTouches[0].clientX);
     results.classList.add('hidden');
-    // // console.log(url);
+
     // if(counter = 0) {  downloadNextPost(url)};
   }
 
   // touch
   if (e.target.className === 'result') {
     clearInterval(preloading);
-    var sub = e.target.innerText
+    let sub = e.target.innerText
       .split('-')[0]
       .trim()
       .replace(/[^a-z\d\_\s]+/gi, '')
@@ -592,11 +600,15 @@ async function touchStartHandlerY(e) {
 }
 
 function touchMoveHandlerY(e) {
+  if (e.target.className.includes('slider')) {
+    return;
+  }
+
   y.push(e.targetTouches[0].clientY);
 }
 
 function touchEndHandlerY(e) {
-  var deltaY = y[0] - y[y.length - 1];
+  let deltaY = y[0] - y[y.length - 1];
 
   y = [];
 
@@ -607,7 +619,7 @@ function touchEndHandlerY(e) {
   }
 }
 
-var postNum = 0;
+let postNum = 0;
 
 function getNextPost() {
   if (counter > 0) {
@@ -680,7 +692,7 @@ async function keyboardButtonsHandler(e) {
       } catch (e) {}
       slideshowToggle.checked = false;
 
-      var sub = res.replace(/[^a-z\d\_\s\+]+/gi, '');
+      let sub = res.replace(/[^a-z\d\_\s\+]+/gi, '');
       let subredditExists = await checkIfSubredditExists(sub);
 
       if (subredditExists) {
@@ -750,7 +762,7 @@ async function clickHandler(e) {
   // mouse click
   if (e.target.className === 'result') {
     clearInterval(preloading);
-    var sub = e.target.innerText
+    let sub = e.target.innerText
       .split('-')[0]
       .trim()
       .replace(/[^a-z\d\_\s]+/gi, '')

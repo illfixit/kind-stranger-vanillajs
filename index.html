@@ -9,27 +9,29 @@
     <title>Kind Stranger</title>
   </head>
   <body>
-    <p id="welcome" class="welcome">
+    <div id="welcome" class="welcome">
       <br />
       Welcome to my Reddit viewer... <br />
       <strong>Kind Stranger</strong>
       <br />
       <br />
       For mobile users:<br />
-      <strong>Use swipes</strong><br /><br />
+      <strong>Use vertical swipes</strong><br /><br />
 
       For desktop users:<br />
       <strong>Use mouse wheel</strong><br />
       or arrow keys<br /><br />
       <strong>Tap twice</strong> to change the scale of images.<br /><br />
-      <strong> Tap here to start </strong><br /><br />
+      <strong id="closeWelcome" style="cursor: pointer">
+        Tap here to start </strong
+      ><br /><br />
       <a
         href="https://github.com/eslessons/kind-stranger"
         style="color: CHOCOLATE"
         >My GitHub Repository</a
       >
-    </p>
-    <button id="menubtn" class="menubtn hidden">
+    </div>
+    <button id="menuBtn" class="menuBtn hidden">
       <img src="./icon.png" class="menuimg" id="menuImg" />
     </button>
 
@@ -65,7 +67,9 @@
     <div id="menu-close" class="menu-close"></div>
     <div id="menu" class="menu">
       <div class="toggle-button-container">
-        <label for="toggle-button" class="toggle-button-text">Slide Show</label>
+        <label for="slideshow-toggle-button" class="toggle-button-text"
+          >Slide Show</label
+        >
         <input
           type="checkbox"
           id="slideshow-toggle-button"
@@ -79,7 +83,7 @@
       </div>
       <br />
       <div class="slider-text hidden" id="slider-text">
-        Intensity of Night Mode
+        <label for="range"> Intensity of Night Mode </label>
       </div>
       <input
         type="range"
@@ -91,6 +95,6 @@
       />
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
   </body>
 </html>

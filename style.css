@@ -73,6 +73,7 @@ input {
 
 .search {
   border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 0%;
   color: white;
   background-color: rgba(0, 0, 0, 0.35);
@@ -144,7 +145,7 @@ a {
   text-decoration: none;
 }
 
-.menubtn {
+.menuBtn {
   position: fixed;
   background: transparent;
   z-index: 170;
@@ -174,6 +175,7 @@ a {
   transform: scale(0.35);
   display: flex;
   outline: none;
+  /* filter: invert(1); */
   /* animation: loading 2s infinite linear alternate; */
 }
 
@@ -354,7 +356,7 @@ a {
   filter: blur(5px);
 }
 
-.loading {
+/* .loading {
   animation: loading 12s ease-in infinite alternate;
   animation-delay: 450ms;
 }
@@ -366,5 +368,30 @@ a {
   100% {
     transform: scale(1.5);
     opacity: 0.8;
+  }
+} */
+
+.loading {
+  animation: loading 1.5s ease-in-out infinite alternate;
+  /* animation-delay: 150ms; */
+}
+
+@keyframes loading {
+  0% {
+    background-color: rgba(0, 0, 0, 0.35);
+  }
+
+  100% {
+    background: rgba(0, 0, 0, 0.7);
+  }
+}
+
+@-webkit-keyframes loading {
+  0% {
+    background-color: rgba(0, 0, 0, 0.35);
+  }
+
+  100% {
+    background-color: rgba(0, 0, 0, 0.7);
   }
 }

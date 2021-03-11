@@ -10,3 +10,30 @@ export const getProperImageUrlFromPost = (post) => {
     post.preview.images[0].resolutions.length - 1
   ].url.replace(/amp;/gi, '');
 };
+
+// Simple function to change the scale of both image and video
+export const scaleChange = (e) => {
+  if (image.style.objectFit != 'contain') {
+    image.style.objectFit = 'contain';
+    video.style.objectFit = 'contain';
+  } else {
+    image.style.objectFit = 'cover';
+    video.style.objectFit = 'cover';
+  }
+};
+
+export const logThis = () => {
+  console.log(store);
+};
+
+export const show = (el) => {
+  el.classList.remove('hidden');
+};
+
+export const hide = (el) => {
+  el.classList.add('hidden');
+};
+
+export const setSrc = (el, source) => {
+  el.src = source;
+};

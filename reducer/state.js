@@ -1,11 +1,14 @@
-export let store = {
+export let state = {
   currentSubreddit: {
     name: `https://www.reddit.com/r/itookapicture/hot.json?`,
     previousPosts: [],
     currentPost: {},
     nextPosts: [],
     after: '',
+    urlsForPreload: [],
+    preloadingAfter: '',
   },
   previousSubreddit: {},
-  slideshow: 0,
+  slideshowInterval: 0,
+  preloadingInterval: 0,
 };

@@ -21,10 +21,11 @@
       For desktop users:<br />
       <strong>Use mouse wheel</strong><br />
       or arrow keys<br /><br />
-      <strong>Tap twice</strong> to change the scale of images.<br /><br />
-      <strong id="closeWelcome" style="cursor: pointer">
-        Tap here to start </strong
-      ><br /><br />
+      <strong>Tap twice</strong> to change the scale of images.
+      <div id="closeWelcome" style="cursor: pointer; font-weight: bold">
+        <br />
+        Tap here to start<br /><br />
+      </div>
       <a
         href="https://github.com/eslessons/kind-stranger"
         style="color: CHOCOLATE"
@@ -39,12 +40,40 @@
       <input id="search" class="search hidden" placeholder="Search..." />
     </div>
 
-    <div id="results" class="results hidden"></div>
-    <!-- <div id="container"> -->
-    <img id="image" src="" class="image blurred" />
+    <div id="results" class="results hidden">
+      <div class="result">
+        <img
+          src="https://styles.redditmedia.com/t5_2r1tc/styles/communityIcon_p1gzakhq6y201.png"
+          style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem"
+        />/r/itookapicture/
+      </div>
+      <div class="result">
+        <img
+          src="https://styles.redditmedia.com/t5_2qh1o/styles/communityIcon_6fzlk8ukx6s51.jpg"
+          style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem"
+        />/r/aww/
+      </div>
+      <div class="result">
+        <img
+          src="https://b.thumbs.redditmedia.com/VoZlOfOxgNGkqayUrmGI96XuSOGKVT-MVI4WK-CXP3o.png"
+          style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem"
+        />/r/art/
+      </div>
+      <div class="result">
+        <img
+          src="https://b.thumbs.redditmedia.com/8cMVsK9DKU-HJSM2WEG9mAGHIgd8-cEsnpJNJlB5NPw.png"
+          style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem"
+        />/r/cozyplaces/
+      </div>
+      <div class="result">
+        <img
+          src="https://a.thumbs.redditmedia.com/bDWcvO6mkX1TIcTnrO-N-5QJPUaWaq6nnQFel3kywD8.png"
+          style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem"
+        />/r/food/
+      </div>
+    </div>
 
-    <!-- poster="https://2.bp.blogspot.com/-R4i03mAdarY/WMksQxeJPeI/AAAAAAAAA90/NqrPy8TfTIQNqVI89vJ_uCce45WvklHhwCLcB/s1600/infinity.gif" -->
-    <!-- poster="https://static.wixstatic.com/media/6e2bd5_0afc500992e0417cb02510329394d0f4.gif" -->
+    <img id="image" src="" class="image blurred" />
 
     <video
       poster="./loader.gif"
@@ -57,7 +86,7 @@
       playsinline
       muted
     ></video>
-    <!-- </div> -->
+
     <div class="description hidden" id="description">
       <a href="" id="a">
         <div class="title" id="title"></div>
@@ -81,7 +110,9 @@
         <label for="toggle-button" class="toggle-button-text">Night Mode</label>
         <input type="checkbox" id="toggle-button" class="toggle-button" />
       </div>
+
       <br />
+
       <div class="slider-text hidden" id="slider-text">
         <label for="range"> Intensity of Night Mode </label>
       </div>
